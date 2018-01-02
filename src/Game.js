@@ -68,7 +68,7 @@ class Game extends React.Component {
                         <input autoFocus type="text" ref="guess" onChange={() => this.captureGuess(this.refs.guess)}/>
                     </div>
             }
-            <div><a href="www.wordnik.com"><img alt="powered by wordnik" src="wordnik.png"/></a></div>
+            <div><a href="http://www.wordnik.com" target="_blank"><img alt="powered by wordnik" src="wordnik.png"/></a></div>
         </div>
     }
 }
