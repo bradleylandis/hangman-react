@@ -4,67 +4,27 @@ import Congratulations from './Congratulations'
 import WordDisplay from './WordDisplay'
 import Loading from './Loading'
 import GuessedLettersDisplay from './GuessedLettersDisplay'
-
-const maxIncorrectGuesses = 7
+import { connect } from 'react-redux'
+import * as actions from './actions'
 
 class Game extends React.Component {
-    state = {
-        word: '',
-        guessedLetters: [],
-        finished: false,
-        lost: false,
-        isLoading: true,
-        incorrectGuesses: []
-    }
-
     componentDidMount(){
-        this.startGame()
-    }
-
-    startGame(){
-        this.setState({incorrectGuesses: [], isLoading: true, lost: false, finished:false})
-        fetch('http://api.wordnik.com:80/v4/words.json/randomWords?hasDictionaryDef=true&excludePartOfSpeech=proper-noun&minCorpusCount=0&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&limit=1&api_key=503890e5c73712c79d3090fb3840a8220541b1c15372a08d8')
-            .then(response =>  {
-                return response.json()
-            })
-            .then(data => {
-                this.setState({
-                    word: data[0].word.toLowerCase(),
-                    guessedLetters: [],
-                    finished: false,
-                    isLoading: false,
-                    incorrectGuesses: []
-                })
-            })
+        this.props.startGame()
     }
 
     captureGuess(guessElement) {
-        this.applyGuess(guessElement.value.toLowerCase())
+        this.props.applyGuess(guessElement.value)
         guessElement.value = ''
-    }
-
-    applyGuess(guess) {
-        const guessedLetters = this.state.guessedLetters.includes(guess) ? this.state.guessedLetters : [...this.state.guessedLetters,guess]
-        const incorrectGuesses = guessedLetters.filter(l => !this.state.word.split('').includes(l))
-        const numberOfIncorrectGuesses = incorrectGuesses.length
-        const lost = numberOfIncorrectGuesses > maxIncorrectGuesses
-        const finished = this.state.word.split('').every(c => guessedLetters.includes(c)) || lost
-        this.setState({
-            guessedLetters: guessedLetters,
-            incorrectGuesses: incorrectGuesses,
-            finished: finished,
-            lost: lost
-        })
     }
 
     render() {
         return <div>
-            <PictureDisplay numberOfIncorrectGuesses={this.state.incorrectGuesses.length}/>
-            {this.state.isLoading ? <Loading/> :
-                this.state.finished ? <Congratulations lost={this.state.lost} word={this.state.word} startOver={() => this.startGame()}/> :
+            <PictureDisplay numberOfIncorrectGuesses={this.props.incorrectGuesses.length}/>
+            {this.props.isLoading ? <Loading/> :
+                this.props.finished ? <Congratulations lost={this.props.lost} word={this.props.unmasked} startOver={() => this.props.startGame()}/> :
                     <div>
-                        <WordDisplay word={this.state.word} guessedLetters={this.state.guessedLetters}/>
-                        <GuessedLettersDisplay guessedLetters={this.state.incorrectGuesses}/>
+                        <WordDisplay word={this.props.word}/>
+                        <GuessedLettersDisplay guessedLetters={this.props.incorrectGuesses}/>
                         <input autoFocus type="text" ref="guess" onChange={() => this.captureGuess(this.refs.guess)}/>
                     </div>
             }
@@ -73,4 +33,24 @@ class Game extends React.Component {
     }
 }
 
-export default Game
+const mapStateToProps = state => {
+    return {
+        word: state.masked,
+        unmasked: state.unmasked,
+        guessedLetters: state.guessedLetters,
+        incorrectGuesses: state.incorrectGuesses,
+        finished: state.finished,
+        lost: state.lost,
+        isLoading: state.isLoading
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        applyGuess: guess => dispatch(actions.applyGuess(guess)),
+        setWord: word => dispatch(actions.setWord(word)),
+        startGame: () => dispatch(actions.startGame())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game)

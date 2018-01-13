@@ -1,8 +1,7 @@
 import React from 'react'
 
-const WordDisplay = ({word, guessedLetters}) => {
-    const characters = word.split('')
-    return <h1>{characters.map(c => guessedLetters.includes(c) ? c : '-')} ({characters.length} letters)</h1>
+const WordDisplay = ({word}) => {
+    return <h1>{word.map(l => l + ' ')} ({word.length} letters)</h1>
 }
 
 export default WordDisplay
