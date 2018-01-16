@@ -6,6 +6,7 @@ import Loading from './Loading'
 import GuessedLettersDisplay from './GuessedLettersDisplay'
 import { connect } from 'react-redux'
 import * as actions from './actions'
+import { getGameData } from './reducers'
 
 class Game extends React.Component {
     componentDidMount(){
@@ -34,15 +35,7 @@ class Game extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return {
-        word: state.masked,
-        unmasked: state.unmasked,
-        guessedLetters: state.guessedLetters,
-        incorrectGuesses: state.incorrectGuesses,
-        finished: state.finished,
-        lost: state.lost,
-        isLoading: state.isLoading
-    }
+    return getGameData(state)
 }
 
 const mapDispatchToProps = ({

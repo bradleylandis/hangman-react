@@ -33,4 +33,16 @@ const wordReducer = (state = {guessedLetters: [], incorrectGuesses: [], isLoadin
     }
 }
 
+export const getGameData = state => {
+    return {
+        word: state.masked,
+        unmasked: state.unmasked,
+        guessedLetters: state.guessedLetters,
+        incorrectGuesses: state.incorrectGuesses,
+        finished: state.finished,
+        lost: state.lost,
+        isLoading: state.isLoading
+    }
+}
+
 export default wordReducer
