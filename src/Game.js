@@ -45,12 +45,10 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        applyGuess: guess => dispatch(actions.applyGuess(guess)),
-        setWord: word => dispatch(actions.setWord(word)),
-        startGame: () => dispatch(actions.startGame())
-    }
-}
+const mapDispatchToProps = ({
+    applyGuess: actions.applyGuess,
+    setWord: actions.setWord,
+    startGame: actions.startGame
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game)
