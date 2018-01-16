@@ -10,7 +10,7 @@ const wordReducer = (state = {guessedLetters: [], incorrectGuesses: [], isLoadin
                 isLoading: false
             }
         case 'APPLY_GUESS':
-            const guessedLetters = [...state.guessedLetters, action.letter]
+            const guessedLetters = state.guessedLetters.includes(action.letter) ? state.guessedLetters : [...state.guessedLetters, action.letter]
             const incorrectGuesses = guessedLetters.filter(l => !state.unmasked.includes(l))
             const lost = incorrectGuesses.length > maxIncorrectGuesses
             const won = state.unmasked.every(c => guessedLetters.includes(c))
@@ -28,6 +28,12 @@ const wordReducer = (state = {guessedLetters: [], incorrectGuesses: [], isLoadin
                 ...state,
                 isLoading: true
             }
+        case 'SET_ERROR':
+            return {
+                ...state,
+                isLoading: false,
+                isError: true
+            }
         default:
             return state
     }
@@ -41,7 +47,8 @@ export const getGameData = state => {
         incorrectGuesses: state.incorrectGuesses,
         finished: state.finished,
         lost: state.lost,
-        isLoading: state.isLoading
+        isLoading: state.isLoading,
+        isError: state.isError
     }
 }
 

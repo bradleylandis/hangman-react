@@ -14,6 +14,12 @@ export const setWord = word => {
     }
 }
 
+export const setError = () => {
+    return {
+        type: 'SET_ERROR'
+    }
+}
+
 const startLoading = () => {
     return {
         type: 'START_LOADING'
@@ -22,7 +28,9 @@ const startLoading = () => {
 
 export const startGame = () => dispatch => {
     dispatch(startLoading)
-    return api.fetchWord().then(
-        word => dispatch(setWord(word))
-    );
+    return api.fetchWord()
+        .then(
+            word => dispatch(setWord(word))
+        )
+        .catch(() => dispatch(setError()))
 }

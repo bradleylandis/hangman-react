@@ -4,6 +4,7 @@ import Congratulations from './Congratulations'
 import WordDisplay from './WordDisplay'
 import Loading from './Loading'
 import GuessedLettersDisplay from './GuessedLettersDisplay'
+import Error from './Error'
 import { connect } from 'react-redux'
 import * as actions from './actions'
 import { getGameData } from './reducers'
@@ -22,6 +23,7 @@ class Game extends React.Component {
         return <div>
             <PictureDisplay numberOfIncorrectGuesses={this.props.incorrectGuesses.length}/>
             {this.props.isLoading ? <Loading/> :
+                this.props.isError ? <Error tryAgain={() => this.props.startGame()}/> :
                 this.props.finished ? <Congratulations lost={this.props.lost} word={this.props.unmasked} startOver={() => this.props.startGame()}/> :
                     <div>
                         <WordDisplay word={this.props.word}/>
