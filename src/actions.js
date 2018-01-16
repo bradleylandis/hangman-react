@@ -29,8 +29,6 @@ const startLoading = () => {
 export const startGame = () => dispatch => {
     dispatch(startLoading)
     return api.fetchWord()
-        .then(
-            word => dispatch(setWord(word))
-        )
+        .then(word => dispatch(setWord(word)))
         .catch(() => dispatch(setError()))
 }
