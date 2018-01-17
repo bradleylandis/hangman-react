@@ -1,16 +1,18 @@
-import { combineReducers } from 'redux'
+import {combineReducers} from 'redux'
 
-const wordReducer = (state = {guessedLetters: [], incorrectGuesses: []}, action) => {
+const gameReducer = (state = {guessedLetters: [], incorrectGuesses: []}, action) => {
     const maxIncorrectGuesses = 7
     switch (action.type) {
         case 'SET_WORD':
             return {
-                word: action.word.split(''),
+                word: action.word.toLowerCase().split(''),
                 guessedLetters: [],
                 incorrectGuesses: []
             }
         case 'APPLY_GUESS':
-            const guessedLetters = state.guessedLetters.includes(action.letter) ? state.guessedLetters : [...state.guessedLetters, action.letter]
+            const guessedLetters = state.guessedLetters.includes(action.letter.toLowerCase()) ?
+                state.guessedLetters :
+                [...state.guessedLetters, action.letter.toLowerCase()]
             const incorrectGuesses = guessedLetters.filter(l => !state.word.includes(l))
             const lost = incorrectGuesses.length > maxIncorrectGuesses
             const won = state.word.every(c => guessedLetters.includes(c))
@@ -27,7 +29,7 @@ const wordReducer = (state = {guessedLetters: [], incorrectGuesses: []}, action)
     }
 }
 
-const gameReducer = (state = {isLoading: true, isError: false}, action) => {
+const appReducer = (state = {isLoading: true, isError: false}, action) => {
     switch (action.type) {
         case 'SET_WORD':
             return {
@@ -51,19 +53,19 @@ const gameReducer = (state = {isLoading: true, isError: false}, action) => {
 
 export const getAppData = state => {
     return {
-        isLoading: state.game.isLoading,
-        isError: state.game.isError
+        isLoading: state.app.isLoading,
+        isError: state.app.isError
     }
 }
 
 export const getGameData = state => {
     return {
-        word: state.word.word,
-        guessedLetters: state.word.guessedLetters,
-        incorrectGuesses: state.word.incorrectGuesses,
-        finished: state.word.finished,
-        lost: state.word.lost
+        word: state.game.word,
+        guessedLetters: state.game.guessedLetters,
+        incorrectGuesses: state.game.incorrectGuesses,
+        finished: state.game.finished,
+        lost: state.game.lost
     }
 }
 
-export default combineReducers({word: wordReducer, game: gameReducer})
+export default combineReducers({game: gameReducer, app: appReducer})
