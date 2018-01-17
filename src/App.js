@@ -19,8 +19,11 @@ class App extends Component {
                     this.props.isError ? <Error tryAgain={() => this.props.startGame()}/> :
                         <Game/>
                 }
-                <div><a href="http://www.wordnik.com" target="_blank" rel="noopener noreferrer"><img
-                    alt="powered by wordnik" src="wordnik.png"/></a></div>
+                <div>
+                    <a href="http://www.wordnik.com" target="_blank" rel="noopener noreferrer">
+                        <img alt="powered by wordnik" src="wordnik.png"/>
+                    </a>
+                </div>
             </div>
         );
     }
