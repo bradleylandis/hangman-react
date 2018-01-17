@@ -7,20 +7,20 @@ export const applyGuess = letter => {
     }
 }
 
-const setWord = word => {
+export const setWord = word => {
     return {
         type: 'SET_WORD',
         word: word
     }
 }
 
-const setError = () => {
+export const setError = () => {
     return {
         type: 'SET_ERROR'
     }
 }
 
-const startLoading = () => {
+export const startLoading = () => {
     return {
         type: 'START_LOADING'
     }

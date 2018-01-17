@@ -9,8 +9,9 @@ import {getGameData} from './reducers'
 
 class Game extends React.Component {
     captureGuess(guessElement) {
-        if (!this.props.guessedLetters.includes(guessElement.value)) {
-            this.props.applyGuess(guessElement.value)
+        if (!this.props.correctGuesses.includes(guessElement.value) &&
+            !this.props.incorrectGuesses.includes(guessElement.value)) {
+                this.props.applyGuess(guessElement.value)
         }
         guessElement.value = ''
     }
@@ -22,7 +23,7 @@ class Game extends React.Component {
                                                     word={this.props.word}
                                                     startOver={() => this.props.startGame()}/> :
                 <div>
-                    <WordDisplay word={this.props.word} guessedLetters={this.props.guessedLetters}/>
+                    <WordDisplay word={this.props.word} correctGuesses={this.props.correctGuesses}/>
                     <GuessedLettersDisplay guessedLetters={this.props.incorrectGuesses}/>
                     <input autoFocus type="text" ref="guess" onChange={() => this.captureGuess(this.refs.guess)}/>
                 </div>
