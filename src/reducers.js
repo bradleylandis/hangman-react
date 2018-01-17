@@ -1,36 +1,46 @@
-const wordReducer = (state = {guessedLetters: [], incorrectGuesses: [], isLoading: true}, action) => {
+import { combineReducers } from 'redux'
+
+const wordReducer = (state = {guessedLetters: [], incorrectGuesses: []}, action) => {
     const maxIncorrectGuesses = 7
     switch (action.type) {
         case 'SET_WORD':
             return {
-                unmasked: action.word.split(''),
-                masked: action.word.split('').map(() => '_'),
+                word: action.word.split(''),
                 guessedLetters: [],
-                incorrectGuesses: [],
-                isLoading: false
+                incorrectGuesses: []
             }
         case 'APPLY_GUESS':
             const guessedLetters = state.guessedLetters.includes(action.letter) ? state.guessedLetters : [...state.guessedLetters, action.letter]
-            const incorrectGuesses = guessedLetters.filter(l => !state.unmasked.includes(l))
+            const incorrectGuesses = guessedLetters.filter(l => !state.word.includes(l))
             const lost = incorrectGuesses.length > maxIncorrectGuesses
-            const won = state.unmasked.every(c => guessedLetters.includes(c))
+            const won = state.word.every(c => guessedLetters.includes(c))
             const finished = won || lost
             return {
                 ...state,
-                masked: state.unmasked.map(c => guessedLetters.includes(c) ? c : '_'),
                 guessedLetters: guessedLetters,
                 incorrectGuesses: incorrectGuesses,
                 finished: finished,
                 lost: lost
             }
+        default:
+            return state
+    }
+}
+
+const gameReducer = (state = {isLoading: true, isError: false}, action) => {
+    switch (action.type) {
+        case 'SET_WORD':
+            return {
+                isLoading: false,
+                isError: false
+            }
         case 'START_LOADING':
             return {
-                ...state,
-                isLoading: true
+                isLoading: true,
+                isError: false
             }
         case 'SET_ERROR':
             return {
-                ...state,
                 isLoading: false,
                 isError: true
             }
@@ -39,17 +49,21 @@ const wordReducer = (state = {guessedLetters: [], incorrectGuesses: [], isLoadin
     }
 }
 
-export const getGameData = state => {
+export const getAppData = state => {
     return {
-        word: state.masked,
-        unmasked: state.unmasked,
-        guessedLetters: state.guessedLetters,
-        incorrectGuesses: state.incorrectGuesses,
-        finished: state.finished,
-        lost: state.lost,
-        isLoading: state.isLoading,
-        isError: state.isError
+        isLoading: state.game.isLoading,
+        isError: state.game.isError
     }
 }
 
-export default wordReducer
+export const getGameData = state => {
+    return {
+        word: state.word.word,
+        guessedLetters: state.word.guessedLetters,
+        incorrectGuesses: state.word.incorrectGuesses,
+        finished: state.word.finished,
+        lost: state.word.lost
+    }
+}
+
+export default combineReducers({word: wordReducer, game: gameReducer})
