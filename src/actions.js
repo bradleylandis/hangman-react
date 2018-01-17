@@ -7,14 +7,14 @@ export const applyGuess = letter => {
     }
 }
 
-export const setWord = word => {
+const setWord = word => {
     return {
         type: 'SET_WORD',
         word: word
     }
 }
 
-export const setError = () => {
+const setError = () => {
     return {
         type: 'SET_ERROR'
     }

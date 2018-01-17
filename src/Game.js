@@ -31,7 +31,6 @@ class Game extends React.Component {
                         <input autoFocus type="text" ref="guess" onChange={() => this.captureGuess(this.refs.guess)}/>
                     </div>
             }
-            <div><a href="http://www.wordnik.com" target="_blank" rel="noopener noreferrer"><img alt="powered by wordnik" src="wordnik.png"/></a></div>
         </div>
     }
 }
@@ -42,7 +41,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = ({
     applyGuess: actions.applyGuess,
-    setWord: actions.setWord,
     startGame: actions.startGame
 })
 
