@@ -12,6 +12,9 @@ export const gameReducer = (state = {word: [], correctGuesses: [], incorrectGues
                 lost: false
             }
         case 'APPLY_GUESS':
+            if(state.finished) {
+                return state;
+            }
             const loweredWord = state.word.map(c => c.toLowerCase())
             const loweredLetter = action.letter.toLowerCase()
             const isCorrect = loweredWord.includes(loweredLetter)
