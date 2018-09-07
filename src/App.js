@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Game from './Game'
 import './App.css'
-import {getAppData} from './reducers'
+import {getAppData} from './appReducer'
 import Loading from './Loading'
 import Error from './Error'
 import * as actions from "./actions";

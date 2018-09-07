@@ -5,7 +5,7 @@ import WordDisplay from './WordDisplay'
 import GuessedLettersDisplay from './GuessedLettersDisplay'
 import {connect} from 'react-redux'
 import * as actions from './actions'
-import {getGameData} from './reducers'
+import {getGameData} from './gameReducer'
 
 class Game extends React.Component {
     constructor() {
