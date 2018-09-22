@@ -14,4 +14,16 @@ describe('Congratulations', () => {
 
         expect(wrapper.find('h1').text()).toEqual('Sorry! The word was test.')
     })
+
+    it('calls start over when clicking Play Again', () => {
+        let hasCalledStartOver = false;
+        const startOver = () => {
+            hasCalledStartOver = true;
+        }
+        const wrapper = shallow(<Congratulations startOver={startOver}/>)
+
+        wrapper.find('button').simulate('click')
+
+        expect(hasCalledStartOver).toBe(true)
+    })
 })
