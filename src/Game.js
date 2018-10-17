@@ -56,7 +56,11 @@ class Game extends React.Component {
                 <div>
                     <WordDisplay word={word} correctGuesses={correctGuesses}/>
                     <GuessedLettersDisplay guessedLetters={incorrectGuesses}/>
-                    <DifficultySettings difficultySettings={difficultySettings} availablePartsOfSpeech={availablePartsOfSpeech} onUpdate={updateDifficulty}/>
+                    <DifficultySettings
+                        difficultySettings={difficultySettings}
+                        availablePartsOfSpeech={availablePartsOfSpeech}
+                        onUpdate={updateDifficulty}
+                    />
                 </div>
             }
         </div>
