@@ -6,6 +6,7 @@ import GuessedLettersDisplay from './GuessedLettersDisplay'
 import {connect} from 'react-redux'
 import * as actions from './actions'
 import {getGameData} from './gameReducer'
+import DifficultySettings from "./DifficultySettings";
 
 class Game extends React.Component {
     constructor() {
@@ -35,14 +36,27 @@ class Game extends React.Component {
     }
 
     render() {
+        const {
+            incorrectGuesses,
+            finished,
+            lost,
+            word,
+            startGame,
+            correctGuesses,
+            updateDifficulty,
+            difficultySettings,
+            availablePartsOfSpeech
+        } = this.props
+
         return <div>
-            <PictureDisplay numberOfIncorrectGuesses={this.props.incorrectGuesses.length}/>
-            {this.props.finished ? <Congratulations lost={this.props.lost}
-                                                    word={this.props.word}
-                                                    startOver={() => this.props.startGame()}/> :
+            <PictureDisplay numberOfIncorrectGuesses={incorrectGuesses.length}/>
+            {finished ? <Congratulations lost={lost}
+                                                    word={word}
+                                                    startOver={() => startGame()}/> :
                 <div>
-                    <WordDisplay word={this.props.word} correctGuesses={this.props.correctGuesses}/>
-                    <GuessedLettersDisplay guessedLetters={this.props.incorrectGuesses}/>
+                    <WordDisplay word={word} correctGuesses={correctGuesses}/>
+                    <GuessedLettersDisplay guessedLetters={incorrectGuesses}/>
+                    <DifficultySettings difficultySettings={difficultySettings} availablePartsOfSpeech={availablePartsOfSpeech} onUpdate={updateDifficulty}/>
                 </div>
             }
         </div>
@@ -55,7 +69,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = ({
     applyGuess: actions.applyGuess,
-    startGame: actions.startGame
+    startGame: actions.startGame,
+    updateDifficulty: actions.updateDifficulty
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game)

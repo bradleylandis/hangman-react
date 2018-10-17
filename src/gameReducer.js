@@ -1,8 +1,33 @@
-export const gameReducer = (state = {word: [], correctGuesses: [], incorrectGuesses: [], finished: false, lost: false}, action) => {
+const availablePartsOfSpeech = ['noun','verb','adjective','adverb','preposition','conjunction','verb-transitive']
+const selectedPartsOfSpeech = ['noun','verb','adjective','adverb','conjunction','verb-transitive']
+const defaultDifficultySettings = {
+    minLength: 7,
+    maxLength: 15,
+    selectedPartsOfSpeech: selectedPartsOfSpeech,
+    minCorpusCount: 1000000,
+    maxCorpusCount: -1,
+    minDictionaryCount: 1,
+    maxDictionaryCount: -1
+}
+
+const defaultState = {
+    availablePartsOfSpeech: availablePartsOfSpeech,
+    difficultySettings: defaultDifficultySettings,
+    word: [],
+    correctGuesses: [],
+    incorrectGuesses: [],
+    finished: false,
+    lost: false
+}
+
+export const gameReducer = (state = defaultState, action) => {
     const maxIncorrectGuesses = 7
     switch (action.type) {
+        case 'SET_DIFFICULTY':
+            return { ...state, difficultySettings: action.difficultySettings }
         case 'SET_WORD':
             return {
+                ...state,
                 word: action.word.split(''),
                 correctGuesses: [],
                 incorrectGuesses: [],
@@ -26,6 +51,7 @@ export const gameReducer = (state = {word: [], correctGuesses: [], incorrectGues
             const won = loweredWord.every(c => correctGuesses.includes(c))
             const finished = won || lost
             return {
+                ...state,
                 word: state.word,
                 correctGuesses: correctGuesses,
                 incorrectGuesses: incorrectGuesses,
@@ -43,6 +69,8 @@ export const getGameData = state => {
         correctGuesses: state.game.correctGuesses,
         incorrectGuesses: state.game.incorrectGuesses,
         finished: state.game.finished,
-        lost: state.game.lost
+        lost: state.game.lost,
+        difficultySettings: state.game.difficultySettings,
+        availablePartsOfSpeech: state.game.availablePartsOfSpeech
     }
 }

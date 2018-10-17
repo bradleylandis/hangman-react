@@ -26,9 +26,16 @@ export const startLoading = () => {
     }
 }
 
-export const startGame = () => dispatch => {
+export const startGame = () => (dispatch, getState) => {
     dispatch(startLoading)
-    return api.fetchWord()
+    return api.fetchWord(getState().game.difficultySettings)
         .then(word => dispatch(setWord(word)))
         .catch(() => dispatch(setError()))
+}
+
+export const updateDifficulty = (data) => {
+    return {
+        type: 'SET_DIFFICULTY',
+        difficultySettings: data
+    }
 }

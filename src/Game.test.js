@@ -1,4 +1,11 @@
-// import 'jsdom-global/register'
+const { JSDOM } = require('jsdom');
+const jsdom = new JSDOM('<!doctype html><html><body><div id="test"></div></body></html>');
+const { window } = jsdom;
+global.window = window;
+global.document = window.document;
+global.navigator = {
+    userAgent: 'node.js',
+};
 import {mount} from "enzyme";
 import React from "react";
 import Game from "./Game";
@@ -9,6 +16,7 @@ describe('Game', () => {
         // let guess = '';
         //
         // const applyGuess = (e) => {
+        //     console.log('apply guess')
         //     guess = e;
         // }
         //
@@ -16,9 +24,9 @@ describe('Game', () => {
         //
         // const store = mockStore({game:{incorrectGuesses:[], word:[]}})
         //
-        // const wrapper = mount(<Game store={store} applyGuess={applyGuess}></Game>, { attachTo: document.body })
+        // const wrapper = mount(<Game store={store} applyGuess={applyGuess}/>)
         //
-        // wrapper.simulate("keyPress", {key: 's'})
+        // wrapper.simulate("keypress", {key: 's'})
         //
         // expect(guess).toBe('s');
     })
