@@ -13,4 +13,5 @@ steps:
 - script: yarn install
 - script: yarn build
 - script: docker build -f Dockerfile -t $(imageName) .
+- script: docker push
   displayName: 'docker build'
