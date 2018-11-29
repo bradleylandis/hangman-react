@@ -1,7 +1,9 @@
 language: node_js
-
+node_js:
+  - "10"
+  
 services:
-    - docker
+  - docker
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s --
