@@ -14,10 +14,18 @@ steps:
   displayName: 'yarn install'
 - script: yarn build
   displayName: 'yarn build'
-- script: docker build -f Dockerfile -t $(imageName) .
-  displayName: 'docker build'
+- task: Docker@1
+  displayName: 'Build an image'
+  inputs:
+    imageName: 'bradleylandis.azurecr.io/repositoryname:$(Build.BuildId)'
+- task: Docker@1
+  displayName: Login
+  inputs:
+    azureSubscriptionEndpoint: 'bradleylandis'
+    azureContainerRegistry: bradleylandis.azurecr.io
+    command: login
 - task: Docker@1
   displayName: 'Push an image'
   inputs:
     command: 'push'
-    imageName: $(imageName)
+    imageName: 'bradleylandis.azurecr.io/$repositoryname:$(Build.BuildId)'
