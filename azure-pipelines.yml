@@ -7,11 +7,11 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 variables:
-  imageName: 'your-container-image-name:$(build.buildId)'
+  imageName: 'webserver-image:$(build.buildId)'
 
 steps:
 - script: yarn install
 - script: yarn build
 - script: docker build -f Dockerfile -t $(imageName) .
-- script: docker push
+- script: docker push $(imageName)
   displayName: 'docker build'
