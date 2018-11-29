@@ -20,6 +20,7 @@ class App extends Component {
                         <Game/>
                 }
                 <div>
+                    Testing...
                     <a href="http://www.wordnik.com" target="_blank" rel="noopener noreferrer">
                         <img alt="powered by wordnik" src="wordnik.png"/>
                     </a>
