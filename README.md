@@ -4,4 +4,4 @@ Simple hangman game written in React/Redux.  Inspired by the book [Javascript fo
 
 [![Build Status](https://travis-ci.com/bradleylandis/hangman-react.svg?branch=master)](https://travis-ci.com/bradleylandis/hangman-react)
 
-test branch protection
+test branch protection again
