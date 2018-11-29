@@ -6,7 +6,6 @@ import GuessedLettersDisplay from './GuessedLettersDisplay'
 import {connect} from 'react-redux'
 import * as actions from './actions'
 import {getGameData} from './gameReducer'
-import DifficultySettings from "./DifficultySettings";
 
 class Game extends React.Component {
     constructor() {
@@ -42,10 +41,7 @@ class Game extends React.Component {
             lost,
             word,
             startGame,
-            correctGuesses,
-            updateDifficulty,
-            difficultySettings,
-            availablePartsOfSpeech
+            correctGuesses
         } = this.props
 
         return <div>
