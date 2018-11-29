@@ -12,10 +12,6 @@ import Game from "./Game";
 import configureStore from 'redux-mock-store'
 
 describe('Game', () => {
-    it('fails on purpose to test build pipeline', () => {
-      expect(1).toBe(2);
-    })
-
     it('calls applyGuess when new guess is made', () => {
         // let guess = '';
         //
