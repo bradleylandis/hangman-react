@@ -1,0 +1,8 @@
+language: javascript
+
+services:
+    - docker
+
+before_install:
+  - docker build -t bradleylandis/hangman-react .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
