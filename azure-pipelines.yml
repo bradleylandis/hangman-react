@@ -20,3 +20,4 @@ steps:
   displayName: 'Push an image'
   inputs:
     command: 'push'
+    imageName: $(imageName)
