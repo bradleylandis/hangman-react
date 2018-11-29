@@ -11,5 +11,6 @@ before_install:
   - yarn install
   - yarn build
   - docker build -t bradleylandis/hangman-react .
+deploy:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push bradleylandis/hangman-react

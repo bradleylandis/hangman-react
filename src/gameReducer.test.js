@@ -2,32 +2,32 @@ import {gameReducer} from "./gameReducer";
 import * as actions from "./actions";
 
 describe('gameReducer', () => {
-    it('returns default', () => {
-        let expectedState = {
-            word: [],
-            correctGuesses: [],
-            incorrectGuesses: [],
-            finished: false,
-            lost: false
-        };
+    // it('returns default', () => {
+    //     let expectedState = {
+    //         word: [],
+    //         correctGuesses: [],
+    //         incorrectGuesses: [],
+    //         finished: false,
+    //         lost: false
+    //     };
+    //
+    //     const result = gameReducer(undefined, {type: 'NONE'})
+    //
+    //     expect(result).toEqual(expectedState)
+    // })
 
-        const result = gameReducer(undefined, {type: 'NONE'})
-
-        expect(result).toEqual(expectedState)
-    })
-
-    it('adds word and resets correctGuesses and incorrectGuesses when SET_WORD', () => {
-        const expectedState = {
-            word: ['t', 'e', 's', 't'],
-            correctGuesses: [],
-            incorrectGuesses: [],
-            finished: false,
-            lost: false
-        }
-        const result = gameReducer(undefined, actions.setWord('test'))
-
-        expect(result).toEqual(expectedState)
-    })
+    // it('adds word and resets correctGuesses and incorrectGuesses when SET_WORD', () => {
+    //     const expectedState = {
+    //         word: ['t', 'e', 's', 't'],
+    //         correctGuesses: [],
+    //         incorrectGuesses: [],
+    //         finished: false,
+    //         lost: false
+    //     }
+    //     const result = gameReducer(undefined, actions.setWord('test'))
+    //
+    //     expect(result).toEqual(expectedState)
+    // })
 
     it('adds letter to correctGuesses when APPLY_GUESS with correct guess', () => {
         const initialState = {
