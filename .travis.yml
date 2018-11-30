@@ -12,7 +12,5 @@ before_install:
   - yarn build
   - docker build -t bradleylandis/hangman-react .
 after_success:
-  - echo "$TRAVIS_BRANCH" "$TRAVIS_PULL_REQUEST"
-  - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false"
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push bradleylandis/hangman-react
+  - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && docker push bradleylandis/hangman-react
