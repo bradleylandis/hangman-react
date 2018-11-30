@@ -24,7 +24,6 @@ class App extends Component {
                         <img alt="powered by wordnik" src="wordnik.png"/>
                     </a>
                 </div>
-                Latest and greatest
             </div>
         );
     }
