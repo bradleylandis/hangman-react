@@ -13,5 +13,4 @@ before_install:
   - docker build -t bradleylandis/hangman-react .
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push bradleylandis/hangman-react
-  if: branch = master
+  - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && docker push bradleylandis/hangman-react
