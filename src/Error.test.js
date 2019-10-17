@@ -10,7 +10,7 @@ describe('Error', () => {
         }
         const wrapper = shallow(<Error tryAgain={tryAgain}/>)
 
-        wrapper.find('a').simulate('click')
+        wrapper.find('button').simulate('click')
 
         expect(hasCalledTryAgain).toBe(true)
     })
