@@ -2,7 +2,6 @@ const api = () => {
   function fetchWord(settings) {
     const {
       selectedPartsOfSpeech,
-      minCorpusCount,
       maxCorpusCount,
       minDictionaryCount,
       maxDictionaryCount,
