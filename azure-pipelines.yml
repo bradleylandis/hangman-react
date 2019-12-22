@@ -10,7 +10,7 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'fec5cb22-bb19-48e4-a2b9-9ecf7e1acadb'
+  dockerRegistryServiceConnection: '7bd36a34-73e7-473d-b6dd-a7fabcf120dc'
   imageRepository: 'hangman'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   containerRegistry: 'blandiscontainerregistry.azurecr.io'
