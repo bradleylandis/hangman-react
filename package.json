@@ -16,7 +16,7 @@
     "enzyme-adapter-react-16": "^1.5.0",
     "jsdom": "12.0.0",
     "jsdom-global": "3.0.2",
-    "react-scripts": "^3.1.2",
+    "react-scripts": "^3.3.0",
     "redux-devtools-extension": "^2.13.2"
   },
   "scripts": {
