@@ -14,8 +14,11 @@
   "devDependencies": {
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "jsdom": "12.0.0",
     "jsdom-global": "3.0.2",
+    "prettier": "^2.5.1",
     "react-scripts": "^5.0.0",
     "redux-devtools-extension": "^2.13.2"
   },
@@ -34,5 +37,32 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 2021,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "env": {
+      "es6": true,
+      "browser": true,
+      "node": true
+    },
+    "plugins": [
+      "prettier",
+      "react"
+    ],
+    "extends": [
+      "plugin:prettier/recommended",
+      "plugin:react/recommended"
+    ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
   }
 }

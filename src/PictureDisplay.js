@@ -1,9 +1,17 @@
-import React from 'react'
+import React from "react";
+import PropTypes from "prop-types";
 
-const PictureDisplay = ({numberOfIncorrectGuesses}) => {
-    return <img
-        alt={`hangman with ${numberOfIncorrectGuesses} incorrect guesses`}
-        src={`hangman${numberOfIncorrectGuesses}.png`}/>
-}
+const PictureDisplay = ({ numberOfIncorrectGuesses }) => {
+  return (
+    <img
+      alt={`hangman with ${numberOfIncorrectGuesses} incorrect guesses`}
+      src={`hangman${numberOfIncorrectGuesses}.png`}
+    />
+  );
+};
 
-export default PictureDisplay
+PictureDisplay.propTypes = {
+  numberOfIncorrectGuesses: PropTypes.number.isRequired,
+};
+
+export default PictureDisplay;
