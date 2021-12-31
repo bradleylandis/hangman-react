@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import PropTypes from "prop-types";
 
 const Congratulations = ({ word, startOver, lost }) => {
@@ -13,7 +13,7 @@ const Congratulations = ({ word, startOver, lost }) => {
 };
 
 Congratulations.propTypes = {
-  word: PropTypes.string.isRequired,
+  word: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   startOver: PropTypes.func.isRequired,
   lost: PropTypes.bool.isRequired,
 };

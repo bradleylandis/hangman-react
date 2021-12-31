@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import serialize from "form-serialize";
 import PropTypes from "prop-types";
 
