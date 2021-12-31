@@ -23,25 +23,27 @@ const Game = () => {
   const word = useSelector(getWord);
 
   React.useEffect(() => {
+    const handleKeyPress = (e) => {
+      captureGuess(e.key);
+    };
+
+    const captureGuess = (guess) => {
+      const normalizedGuess = guess.toLowerCase();
+      if (
+        !finished &&
+        !correctGuesses.includes(normalizedGuess) &&
+        !incorrectGuesses.includes(normalizedGuess)
+      ) {
+        dispatch(applyGuess(normalizedGuess));
+      }
+    };
+  
     document.addEventListener("keypress", handleKeyPress);
     return () => document.removeEventListener("keypress", handleKeyPress);
   }, []);
 
-  const handleKeyPress = (e) => {
-    captureGuess(e.key);
-  };
-
-  const captureGuess = (guess) => {
-    const normalizedGuess = guess.toLowerCase();
-    if (
-      !finished &&
-      !correctGuesses.includes(normalizedGuess) &&
-      !incorrectGuesses.includes(normalizedGuess)
-    ) {
-      dispatch(applyGuess(normalizedGuess));
-    }
-  };
-
+  
+  
   return (
     <div>
       <PictureDisplay numberOfIncorrectGuesses={incorrectGuesses.length} />

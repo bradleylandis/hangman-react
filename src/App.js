@@ -14,7 +14,7 @@ const App = () => {
 
   React.useEffect(() => {
     dispatch(actions.startGame());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">
