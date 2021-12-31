@@ -1,19 +1,21 @@
 import PictureDisplay from "./PictureDisplay";
-import { shallow } from "enzyme";
 import React from "react";
+import { screen, render } from "@testing-library/react";
 
 describe("PictureDisplay", () => {
   it("displays the corresponding image for the number of wrong guesses", () => {
-    const wrapper = shallow(<PictureDisplay numberOfIncorrectGuesses={1} />);
+    render(<PictureDisplay numberOfIncorrectGuesses={1} />);
 
-    expect(wrapper.find("img").prop("src")).toEqual("hangman1.png");
+    const image = screen.getByRole("img");
+
+    expect(image.getAttribute("src")).toBe("hangman1.png");
   });
 
   it("displays the alt text for the number of wrong guesses", () => {
-    const wrapper = shallow(<PictureDisplay numberOfIncorrectGuesses={1} />);
+    render(<PictureDisplay numberOfIncorrectGuesses={1} />);
 
-    expect(wrapper.find("img").prop("alt")).toEqual(
-      "hangman with 1 incorrect guesses"
-    );
+    const image = screen.getByAltText("hangman with 1 incorrect guesses");
+
+    expect(image).toBeInTheDocument();
   });
 });

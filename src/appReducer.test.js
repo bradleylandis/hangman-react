@@ -1,4 +1,4 @@
-import { appReducer } from "./appReducer";
+import appReducer from "./appReducer";
 import * as actions from "./actions";
 
 describe("appReducer", () => {

@@ -1,4 +1,4 @@
-import { gameReducer } from "./gameReducer";
+import gameReducer from "./gameReducer";
 import * as actions from "./actions";
 
 describe("gameReducer", () => {

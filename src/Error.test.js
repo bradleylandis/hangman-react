@@ -1,17 +1,16 @@
 import React from "react";
-import { shallow } from "enzyme";
 import Error from "./Error";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 describe("Error", () => {
   it("calls try again when clicking try again", () => {
-    let hasCalledTryAgain = false;
-    const tryAgain = () => {
-      hasCalledTryAgain = true;
-    };
-    const wrapper = shallow(<Error tryAgain={tryAgain} />);
+    const tryAgain = jest.fn();
+    render(<Error tryAgain={tryAgain} />);
 
-    wrapper.find("button").simulate("click");
+    const button = screen.getByRole("button", { name: "try again" });
+    userEvent.click(button);
 
-    expect(hasCalledTryAgain).toBe(true);
+    expect(tryAgain).toHaveBeenCalled();
   });
 });

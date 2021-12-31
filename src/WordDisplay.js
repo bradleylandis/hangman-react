@@ -6,7 +6,7 @@ const WordDisplay = ({ word, correctGuesses }) => {
     <h1>
       {word.map(
         (letter) => (correctGuesses.includes(letter) ? letter : "_") + " "
-      )}{" "}
+      )}
       ({word.length} letters)
     </h1>
   );
