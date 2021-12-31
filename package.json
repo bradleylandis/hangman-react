@@ -56,7 +56,9 @@
     ],
     "extends": [
       "plugin:prettier/recommended",
-      "plugin:react/recommended"
+      "plugin:react/recommended",
+      "plugin:jest/recommended",
+      "plugin:jest/style"
     ],
     "settings": {
       "react": {
