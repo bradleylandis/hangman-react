@@ -1,4 +1,4 @@
-import api from "./api";
+import { fetchWord } from "./api";
 
 export const applyGuess = (letter) => {
   return {
@@ -27,9 +27,9 @@ export const startLoading = () => {
 };
 
 export const startGame = () => async (dispatch, getState) => {
-  dispatch(startLoading);
+  dispatch(startLoading());
   try {
-    const word = await api.fetchWord(getState().game.difficultySettings);
+    const word = await fetchWord(getState().game.difficultySettings);
     dispatch(setWord(word));
   } catch {
     dispatch(setError());
