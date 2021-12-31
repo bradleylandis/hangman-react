@@ -35,7 +35,7 @@ const defaultState = {
   lost: false,
 };
 
-export const gameReducer = (state = defaultState, action) => {
+const gameReducer = (state = defaultState, action) => {
   const maxIncorrectGuesses = 7;
   switch (action.type) {
     case "SET_DIFFICULTY":
@@ -79,3 +79,12 @@ export const gameReducer = (state = defaultState, action) => {
       return state;
   }
 };
+
+export default gameReducer;
+
+export const getDifficultySettings = (state) => state.difficultySettings;
+export const getWord = (state) => state.word;
+export const getLost = (state) => state.lost;
+export const getFinished = (state) => state.finished;
+export const getIncorrectGuesses = (state) => state.incorrectGuesses;
+export const getCorrectGuesses = (state) => state.correctGuesses;

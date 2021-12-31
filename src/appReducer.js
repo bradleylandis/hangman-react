@@ -1,7 +1,4 @@
-export const appReducer = (
-  state = { isLoading: true, isError: false },
-  action
-) => {
+const appReducer = (state = { isLoading: true, isError: false }, action) => {
   switch (action.type) {
     case "SET_WORD":
       return {
@@ -22,3 +19,8 @@ export const appReducer = (
       return state;
   }
 };
+
+export default appReducer;
+
+export const getIsLoading = (state) => state.isLoading;
+export const getIsError = (state) => state.isError;

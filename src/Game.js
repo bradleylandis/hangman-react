@@ -5,13 +5,23 @@ import WordDisplay from "./WordDisplay";
 import GuessedLettersDisplay from "./GuessedLettersDisplay";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "./actions";
-import { getGameData } from "./reducers";
+import {
+  getWord,
+  getCorrectGuesses,
+  getIncorrectGuesses,
+  getFinished,
+  getLost,
+} from "./reducers";
 
 const Game = () => {
   const dispatch = useDispatch();
   const { applyGuess, startGame } = actions;
-  const { incorrectGuesses, finished, lost, word, correctGuesses } =
-    useSelector(getGameData);
+  const correctGuesses = useSelector(getCorrectGuesses);
+  const incorrectGuesses = useSelector(getIncorrectGuesses);
+  const finished = useSelector(getFinished);
+  const lost = useSelector(getLost);
+  const word = useSelector(getWord);
+
   React.useEffect(() => {
     document.addEventListener("keypress", handleKeyPress);
     return () => document.removeEventListener("keypress", handleKeyPress);

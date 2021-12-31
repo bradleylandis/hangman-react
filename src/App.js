@@ -2,14 +2,15 @@ import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Game from "./Game";
 import "./App.css";
-import { getAppData } from "./reducers";
+import { getIsError, getIsLoading } from "./reducers";
 import Loading from "./Loading";
 import Error from "./Error";
 import * as actions from "./actions";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { isLoading, isError } = useSelector(getAppData);
+  const isLoading = useSelector(getIsLoading);
+  const isError = useSelector(getIsError);
 
   React.useEffect(() => {
     dispatch(actions.startGame());
