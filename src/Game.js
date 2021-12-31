@@ -5,7 +5,7 @@ import WordDisplay from "./WordDisplay";
 import GuessedLettersDisplay from "./GuessedLettersDisplay";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "./actions";
-import { getGameData } from "./gameReducer";
+import { getGameData } from "./reducers";
 
 const Game = () => {
   const dispatch = useDispatch();
@@ -22,12 +22,13 @@ const Game = () => {
   };
 
   const captureGuess = (guess) => {
+    const normalizedGuess = guess.toLowerCase();
     if (
       !finished &&
-      !correctGuesses.includes(guess) &&
-      !incorrectGuesses.includes(guess)
+      !correctGuesses.includes(normalizedGuess) &&
+      !incorrectGuesses.includes(normalizedGuess)
     ) {
-      dispatch(applyGuess(guess));
+      dispatch(applyGuess(normalizedGuess));
     }
   };
 

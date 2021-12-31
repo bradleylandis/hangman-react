@@ -26,12 +26,14 @@ export const startLoading = () => {
   };
 };
 
-export const startGame = () => (dispatch, getState) => {
+export const startGame = () => async (dispatch, getState) => {
   dispatch(startLoading);
-  return api
-    .fetchWord(getState().game.difficultySettings)
-    .then((word) => dispatch(setWord(word)))
-    .catch(() => dispatch(setError()));
+  try {
+    const word = await api.fetchWord(getState().game.difficultySettings);
+    dispatch(setWord(word));
+  } catch {
+    dispatch(setError());
+  }
 };
 
 export const updateDifficulty = (data) => {

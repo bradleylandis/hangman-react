@@ -2,7 +2,7 @@ import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Game from "./Game";
 import "./App.css";
-import { getAppData } from "./appReducer";
+import { getAppData } from "./reducers";
 import Loading from "./Loading";
 import Error from "./Error";
 import * as actions from "./actions";

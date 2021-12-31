@@ -22,10 +22,3 @@ export const appReducer = (
       return state;
   }
 };
-
-export const getAppData = (state) => {
-  return {
-    isLoading: state.app.isLoading,
-    isError: state.app.isError,
-  };
-};

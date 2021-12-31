@@ -43,7 +43,7 @@ export const gameReducer = (state = defaultState, action) => {
     case "SET_WORD":
       return {
         ...state,
-        word: action.word.split(""),
+        word: action.word.toLowerCase().split(""),
         correctGuesses: [],
         incorrectGuesses: [],
         finished: false,
@@ -78,16 +78,4 @@ export const gameReducer = (state = defaultState, action) => {
     default:
       return state;
   }
-};
-
-export const getGameData = (state) => {
-  return {
-    word: state.game.word,
-    correctGuesses: state.game.correctGuesses,
-    incorrectGuesses: state.game.incorrectGuesses,
-    finished: state.game.finished,
-    lost: state.game.lost,
-    difficultySettings: state.game.difficultySettings,
-    availablePartsOfSpeech: state.game.availablePartsOfSpeech,
-  };
 };
