@@ -1,6 +1,7 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions";
-
+import "../db";
 import axios from "axios";
+import Game from "../models/Game";
 
 const httpTrigger: AzureFunction = async function (
   context: Context,
@@ -26,9 +27,18 @@ const httpTrigger: AzureFunction = async function (
     maxDictionaryCount: -1,
   };
   const response = await fetchWord(defaultDifficultySettings);
+
+  var game = new Game({
+    word: response.word,
+    status: "in progress",
+    playerId: 1,
+    startedAt: Date.now(),
+  });
+  await game.save();
+
   context.res = {
     // status: 200, /* Defaults to 200 */
-    body: response,
+    body: { word: response.word },
   };
 };
 
