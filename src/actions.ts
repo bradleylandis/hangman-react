@@ -2,6 +2,7 @@ import { fetchWord } from "./api";
 import { getDifficultySettings } from "./reducers";
 import type { Dispatch } from "redux";
 import type {GlobalState} from './reducers';
+import { DifficultySettings } from "./gameReducer";
 
 export interface ApplyGuessAction {
   type: "APPLY_GUESS",
@@ -13,7 +14,12 @@ export const applyGuess = (letter: string): ApplyGuessAction => ({
   letter: letter,
 });
 
-export const setWord = (word: string) => {
+export interface SetWordAction {
+  type: "SET_WORD",
+  word: string
+}
+
+export const setWord = (word: string): SetWordAction => {
   return {
     type: "SET_WORD",
     word: word,
@@ -43,7 +49,12 @@ export const startGame = () => async (dispatch: Dispatch, getState: () => Global
   }
 };
 
-export const updateDifficulty = (data: {}) => {
+export interface SetDifficultyAction {
+  type: "SET_DIFFICULTY",
+  difficultySettings: DifficultySettings
+}
+
+export const updateDifficulty = (data: DifficultySettings): SetDifficultyAction => {
   return {
     type: "SET_DIFFICULTY",
     difficultySettings: data,

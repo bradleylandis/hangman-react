@@ -1,4 +1,4 @@
-import type {ApplyGuessAction} from './actions'
+import type {SetWordAction, SetDifficultyAction, ApplyGuessAction} from './actions'
 
 const availablePartsOfSpeech = [
   "noun",
@@ -38,18 +38,6 @@ const defaultState = {
   lost: false,
 };
 
-interface SetDifficultyAction {
-  type: "SET_DIFFICULTY",
-  difficultySettings: {}
-}
-
-interface SetWordAction {
-  type: "SET_WORD",
-  word: string
-}
-
-type GameAction = SetDifficultyAction | SetWordAction | ApplyGuessAction;
-
 export interface DifficultySettings {
   minLength: number,
   maxLength: number,
@@ -69,6 +57,8 @@ export interface GameState {
   finished: boolean,
   lost: boolean,
 }
+
+type GameAction = SetDifficultyAction | SetWordAction | ApplyGuessAction;
 
 const gameReducer = (state: GameState = defaultState, action: GameAction) => {
   const maxIncorrectGuesses = 7;
