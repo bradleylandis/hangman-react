@@ -25,7 +25,7 @@ const Game = () => {
   React.useEffect(() => {
     function handleKeyPress(this: HTMLDocument, e: KeyboardEvent) {
       captureGuess(e.key);
-    };
+    }
 
     const captureGuess = (guess: string) => {
       const normalizedGuess = guess.toLowerCase();
@@ -37,10 +37,10 @@ const Game = () => {
         dispatch(applyGuess(normalizedGuess));
       }
     };
-  
+
     document.addEventListener("keypress", handleKeyPress);
     return () => document.removeEventListener("keypress", handleKeyPress);
-  },);
+  });
 
   return (
     <div>

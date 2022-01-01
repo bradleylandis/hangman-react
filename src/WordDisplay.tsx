@@ -1,6 +1,6 @@
 interface WordDisplayProps {
-  word: string[],
-  correctGuesses: string[]
+  word: string[];
+  correctGuesses: string[];
 }
 
 const WordDisplay = ({ word, correctGuesses }: WordDisplayProps) => {

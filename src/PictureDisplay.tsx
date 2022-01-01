@@ -1,5 +1,5 @@
 interface PictureDisplayProps {
-  numberOfIncorrectGuesses: number
+  numberOfIncorrectGuesses: number;
 }
 
 const PictureDisplay = ({ numberOfIncorrectGuesses }: PictureDisplayProps) => {

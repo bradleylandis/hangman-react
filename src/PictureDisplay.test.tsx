@@ -1,5 +1,4 @@
 import PictureDisplay from "./PictureDisplay";
-import React from "react";
 import { screen, render } from "@testing-library/react";
 
 describe("PictureDisplay", () => {

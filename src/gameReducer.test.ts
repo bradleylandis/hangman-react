@@ -1,5 +1,5 @@
 import gameReducer from "./gameReducer";
-import type {GameState} from './gameReducer';
+import type { GameState } from "./gameReducer";
 import * as actions from "./actions";
 
 describe("gameReducer", () => {
@@ -38,15 +38,15 @@ describe("gameReducer", () => {
       availablePartsOfSpeech: [],
       finished: false,
       difficultySettings: {
-        maxCorpusCount:1,
+        maxCorpusCount: 1,
         minCorpusCount: 1,
         maxDictionaryCount: 1,
         maxLength: 1,
         minDictionaryCount: 1,
         minLength: 1,
-        selectedPartsOfSpeech: []
+        selectedPartsOfSpeech: [],
       },
-      lost: false
+      lost: false,
     };
     const newGuess = "t";
     const expectedState = {
@@ -56,13 +56,13 @@ describe("gameReducer", () => {
       finished: false,
       lost: false,
       difficultySettings: {
-        maxCorpusCount:1,
+        maxCorpusCount: 1,
         minCorpusCount: 1,
         maxDictionaryCount: 1,
         maxLength: 1,
         minDictionaryCount: 1,
         minLength: 1,
-        selectedPartsOfSpeech: []
+        selectedPartsOfSpeech: [],
       },
       availablePartsOfSpeech: [],
     };
@@ -79,15 +79,15 @@ describe("gameReducer", () => {
       availablePartsOfSpeech: [],
       finished: false,
       difficultySettings: {
-        maxCorpusCount:1,
+        maxCorpusCount: 1,
         minCorpusCount: 1,
         maxDictionaryCount: 1,
         maxLength: 1,
         minDictionaryCount: 1,
         minLength: 1,
-        selectedPartsOfSpeech: []
+        selectedPartsOfSpeech: [],
       },
-      lost: false
+      lost: false,
     };
     const newGuess = "t";
     const expectedState = {
@@ -97,13 +97,13 @@ describe("gameReducer", () => {
       finished: false,
       lost: false,
       difficultySettings: {
-        maxCorpusCount:1,
+        maxCorpusCount: 1,
         minCorpusCount: 1,
         maxDictionaryCount: 1,
         maxLength: 1,
         minDictionaryCount: 1,
         minLength: 1,
-        selectedPartsOfSpeech: []
+        selectedPartsOfSpeech: [],
       },
       availablePartsOfSpeech: [],
     };
@@ -120,15 +120,15 @@ describe("gameReducer", () => {
       availablePartsOfSpeech: [],
       finished: false,
       difficultySettings: {
-        maxCorpusCount:1,
+        maxCorpusCount: 1,
         minCorpusCount: 1,
         maxDictionaryCount: 1,
         maxLength: 1,
         minDictionaryCount: 1,
         minLength: 1,
-        selectedPartsOfSpeech: []
+        selectedPartsOfSpeech: [],
       },
-      lost: false
+      lost: false,
     };
     const newGuess = "z";
     const expectedState = {
@@ -138,13 +138,13 @@ describe("gameReducer", () => {
       finished: false,
       lost: false,
       difficultySettings: {
-        maxCorpusCount:1,
+        maxCorpusCount: 1,
         minCorpusCount: 1,
         maxDictionaryCount: 1,
         maxLength: 1,
         minDictionaryCount: 1,
         minLength: 1,
-        selectedPartsOfSpeech: []
+        selectedPartsOfSpeech: [],
       },
       availablePartsOfSpeech: [],
     };
@@ -162,15 +162,15 @@ describe("gameReducer", () => {
       availablePartsOfSpeech: [],
       finished: false,
       difficultySettings: {
-        maxCorpusCount:1,
+        maxCorpusCount: 1,
         minCorpusCount: 1,
         maxDictionaryCount: 1,
         maxLength: 1,
         minDictionaryCount: 1,
         minLength: 1,
-        selectedPartsOfSpeech: []
+        selectedPartsOfSpeech: [],
       },
-      lost: false
+      lost: false,
     };
     const newGuess = "z";
     const expectedState = {
@@ -180,13 +180,13 @@ describe("gameReducer", () => {
       finished: false,
       lost: false,
       difficultySettings: {
-        maxCorpusCount:1,
+        maxCorpusCount: 1,
         minCorpusCount: 1,
         maxDictionaryCount: 1,
         maxLength: 1,
         minDictionaryCount: 1,
         minLength: 1,
-        selectedPartsOfSpeech: []
+        selectedPartsOfSpeech: [],
       },
       availablePartsOfSpeech: [],
     };
@@ -204,15 +204,15 @@ describe("gameReducer", () => {
       availablePartsOfSpeech: [],
       finished: false,
       difficultySettings: {
-        maxCorpusCount:1,
+        maxCorpusCount: 1,
         minCorpusCount: 1,
         maxDictionaryCount: 1,
         maxLength: 1,
         minDictionaryCount: 1,
         minLength: 1,
-        selectedPartsOfSpeech: []
+        selectedPartsOfSpeech: [],
       },
-      lost: false
+      lost: false,
     };
     const newGuess = "s";
     const expectedState = {
@@ -222,13 +222,13 @@ describe("gameReducer", () => {
       finished: true,
       lost: false,
       difficultySettings: {
-        maxCorpusCount:1,
+        maxCorpusCount: 1,
         minCorpusCount: 1,
         maxDictionaryCount: 1,
         maxLength: 1,
         minDictionaryCount: 1,
         minLength: 1,
-        selectedPartsOfSpeech: []
+        selectedPartsOfSpeech: [],
       },
       availablePartsOfSpeech: [],
     };
@@ -246,15 +246,15 @@ describe("gameReducer", () => {
       availablePartsOfSpeech: [],
       finished: false,
       difficultySettings: {
-        maxCorpusCount:1,
+        maxCorpusCount: 1,
         minCorpusCount: 1,
         maxDictionaryCount: 1,
         maxLength: 1,
         minDictionaryCount: 1,
         minLength: 1,
-        selectedPartsOfSpeech: []
+        selectedPartsOfSpeech: [],
       },
-      lost: false
+      lost: false,
     };
     const newGuess = "h";
     const expectedState = {
@@ -265,14 +265,14 @@ describe("gameReducer", () => {
       lost: true,
       availablePartsOfSpeech: [],
       difficultySettings: {
-        maxCorpusCount:1,
+        maxCorpusCount: 1,
         minCorpusCount: 1,
         maxDictionaryCount: 1,
         maxLength: 1,
         minDictionaryCount: 1,
         minLength: 1,
-        selectedPartsOfSpeech: []
-      }
+        selectedPartsOfSpeech: [],
+      },
     };
 
     const result = gameReducer(initialState, actions.applyGuess(newGuess));

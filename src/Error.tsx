@@ -1,5 +1,5 @@
 interface ErrorProps {
-  tryAgain: () => void
+  tryAgain: () => void;
 }
 
 const Error = ({ tryAgain }: ErrorProps) => {

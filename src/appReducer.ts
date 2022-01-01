@@ -1,16 +1,19 @@
 import { Action } from "redux";
 
 export interface AppState {
-  isLoading: boolean,
-  isError: boolean
+  isLoading: boolean;
+  isError: boolean;
 }
 
 const initialAppState = {
   isLoading: true,
-  isError: false
-}
+  isError: false,
+};
 
-const appReducer = (state: AppState = initialAppState, action: Action<string>) => {
+const appReducer = (
+  state: AppState = initialAppState,
+  action: Action<string>
+) => {
   switch (action.type) {
     case "SET_WORD":
       return {

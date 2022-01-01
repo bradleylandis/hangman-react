@@ -1,8 +1,10 @@
 interface GuessedLettersDisplayProps {
-  guessedLetters: string[]
+  guessedLetters: string[];
 }
 
-const GuessedLettersDisplay = ({ guessedLetters }: GuessedLettersDisplayProps) => {
+const GuessedLettersDisplay = ({
+  guessedLetters,
+}: GuessedLettersDisplayProps) => {
   return (
     <h1>
       {guessedLetters.map((c) => (

@@ -1,4 +1,8 @@
-import type {SetWordAction, SetDifficultyAction, ApplyGuessAction} from './actions'
+import type {
+  SetWordAction,
+  SetDifficultyAction,
+  ApplyGuessAction,
+} from "./actions";
 
 const availablePartsOfSpeech = [
   "noun",
@@ -39,23 +43,23 @@ const defaultState = {
 };
 
 export interface DifficultySettings {
-  minLength: number,
-  maxLength: number,
-  selectedPartsOfSpeech: string[],
-  minCorpusCount: number,
-  maxCorpusCount: number,
-  minDictionaryCount: number,
-  maxDictionaryCount: number,
+  minLength: number;
+  maxLength: number;
+  selectedPartsOfSpeech: string[];
+  minCorpusCount: number;
+  maxCorpusCount: number;
+  minDictionaryCount: number;
+  maxDictionaryCount: number;
 }
 
 export interface GameState {
-  availablePartsOfSpeech: string[],
-  difficultySettings: DifficultySettings,
-  word: string[],
-  correctGuesses: string[],
-  incorrectGuesses: string[],
-  finished: boolean,
-  lost: boolean,
+  availablePartsOfSpeech: string[];
+  difficultySettings: DifficultySettings;
+  word: string[];
+  correctGuesses: string[];
+  incorrectGuesses: string[];
+  finished: boolean;
+  lost: boolean;
 }
 
 type GameAction = SetDifficultyAction | SetWordAction | ApplyGuessAction;
@@ -107,7 +111,8 @@ const gameReducer = (state: GameState = defaultState, action: GameAction) => {
 
 export default gameReducer;
 
-export const getDifficultySettings = (state: GameState) => state.difficultySettings;
+export const getDifficultySettings = (state: GameState) =>
+  state.difficultySettings;
 export const getWord = (state: GameState) => state.word;
 export const getLost = (state: GameState) => state.lost;
 export const getFinished = (state: GameState) => state.finished;

@@ -1,17 +1,17 @@
-import type {DifficultySettings as DifficultySettingsType} from './gameReducer'
+import type { DifficultySettings as DifficultySettingsType } from "./gameReducer";
 
 interface DifficultySettingsProps {
   difficultySettings: {
-    minLength: number,
-    maxLength: number,
-    selectedPartsOfSpeech: string[],
-    minCorpusCount: number,
-    maxCorpusCount: number,
-    minDictionaryCount: number,
-    maxDictionaryCount: number
-  },
-  availablePartsOfSpeech: string[],
-  onUpdate: (data: DifficultySettingsType) => void
+    minLength: number;
+    maxLength: number;
+    selectedPartsOfSpeech: string[];
+    minCorpusCount: number;
+    maxCorpusCount: number;
+    minDictionaryCount: number;
+    maxDictionaryCount: number;
+  };
+  availablePartsOfSpeech: string[];
+  onUpdate: (data: DifficultySettingsType) => void;
 }
 
 const DifficultySettings = ({
