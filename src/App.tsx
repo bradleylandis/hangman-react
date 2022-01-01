@@ -6,6 +6,9 @@ import { getIsError, getIsLoading } from "./reducers";
 import Loading from "./Loading";
 import Error from "./Error";
 import * as actions from "./actions";
+import Login from "./Login";
+import Logout from "./Logout";
+import User from "./User";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -18,6 +21,11 @@ const App = () => {
 
   return (
     <div className="App">
+      <div>
+        <Login />
+        <Logout />
+        <User />
+      </div>
       {isLoading ? (
         <Loading />
       ) : isError ? (
