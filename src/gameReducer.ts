@@ -1,3 +1,5 @@
+import type {ApplyGuessAction} from './actions'
+
 const availablePartsOfSpeech = [
   "noun",
   "verb",
@@ -15,6 +17,7 @@ const selectedPartsOfSpeech = [
   "conjunction",
   "verb-transitive",
 ];
+
 const defaultDifficultySettings = {
   minLength: 7,
   maxLength: 15,
@@ -35,7 +38,39 @@ const defaultState = {
   lost: false,
 };
 
-const gameReducer = (state = defaultState, action) => {
+interface SetDifficultyAction {
+  type: "SET_DIFFICULTY",
+  difficultySettings: {}
+}
+
+interface SetWordAction {
+  type: "SET_WORD",
+  word: string
+}
+
+type GameAction = SetDifficultyAction | SetWordAction | ApplyGuessAction;
+
+interface DifficultySettings {
+  minLength: number,
+  maxLength: number,
+  selectedPartsOfSpeech: string[],
+  minCorpusCount: number,
+  maxCorpusCount: number,
+  minDictionaryCount: number,
+  maxDictionaryCount: number,
+}
+
+export interface GameState {
+  availablePartsOfSpeech: string[],
+  difficultySettings: DifficultySettings,
+  word: string[],
+  correctGuesses: string[],
+  incorrectGuesses: string[],
+  finished: boolean,
+  lost: boolean,
+}
+
+const gameReducer = (state: GameState = defaultState, action: GameAction) => {
   const maxIncorrectGuesses = 7;
   switch (action.type) {
     case "SET_DIFFICULTY":
@@ -82,9 +117,9 @@ const gameReducer = (state = defaultState, action) => {
 
 export default gameReducer;
 
-export const getDifficultySettings = (state) => state.difficultySettings;
-export const getWord = (state) => state.word;
-export const getLost = (state) => state.lost;
-export const getFinished = (state) => state.finished;
-export const getIncorrectGuesses = (state) => state.incorrectGuesses;
-export const getCorrectGuesses = (state) => state.correctGuesses;
+export const getDifficultySettings = (state: GameState) => state.difficultySettings;
+export const getWord = (state: GameState) => state.word;
+export const getLost = (state: GameState) => state.lost;
+export const getFinished = (state: GameState) => state.finished;
+export const getIncorrectGuesses = (state: GameState) => state.incorrectGuesses;
+export const getCorrectGuesses = (state: GameState) => state.correctGuesses;

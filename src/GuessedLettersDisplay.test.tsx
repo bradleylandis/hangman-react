@@ -1,4 +1,3 @@
-import React from "react";
 import GuessedLettersDisplay from "./GuessedLettersDisplay";
 import { screen, render } from "@testing-library/react";
 

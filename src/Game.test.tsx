@@ -1,4 +1,3 @@
-import React from "react";
 import Game from "./Game";
 import configureStore from "redux-mock-store";
 

@@ -1,7 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+interface GuessedLettersDisplayProps {
+  guessedLetters: string[]
+}
 
-const GuessedLettersDisplay = ({ guessedLetters }) => {
+const GuessedLettersDisplay = ({ guessedLetters }: GuessedLettersDisplayProps) => {
   return (
     <h1>
       {guessedLetters.map((c) => (
@@ -11,10 +12,6 @@ const GuessedLettersDisplay = ({ guessedLetters }) => {
       ))}
     </h1>
   );
-};
-
-GuessedLettersDisplay.propTypes = {
-  guessedLetters: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default GuessedLettersDisplay;

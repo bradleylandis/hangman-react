@@ -1,4 +1,3 @@
-import * as React from "react";
 import WordDisplay from "./WordDisplay";
 import { screen, render } from "@testing-library/react";
 

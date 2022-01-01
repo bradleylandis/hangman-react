@@ -1,4 +1,5 @@
 import gameReducer from "./gameReducer";
+import type {GameState} from './gameReducer';
 import * as actions from "./actions";
 
 describe("gameReducer", () => {
@@ -30,10 +31,22 @@ describe("gameReducer", () => {
   // })
 
   it("adds letter to correctGuesses when APPLY_GUESS with correct guess", () => {
-    const initialState = {
+    const initialState: GameState = {
       word: "test".split(""),
       correctGuesses: [],
       incorrectGuesses: [],
+      availablePartsOfSpeech: [],
+      finished: false,
+      difficultySettings: {
+        maxCorpusCount:1,
+        minCorpusCount: 1,
+        maxDictionaryCount: 1,
+        maxLength: 1,
+        minDictionaryCount: 1,
+        minLength: 1,
+        selectedPartsOfSpeech: []
+      },
+      lost: false
     };
     const newGuess = "t";
     const expectedState = {
@@ -42,6 +55,16 @@ describe("gameReducer", () => {
       incorrectGuesses: [],
       finished: false,
       lost: false,
+      difficultySettings: {
+        maxCorpusCount:1,
+        minCorpusCount: 1,
+        maxDictionaryCount: 1,
+        maxLength: 1,
+        minDictionaryCount: 1,
+        minLength: 1,
+        selectedPartsOfSpeech: []
+      },
+      availablePartsOfSpeech: [],
     };
     const result = gameReducer(initialState, actions.applyGuess(newGuess));
 
@@ -53,6 +76,18 @@ describe("gameReducer", () => {
       word: "test".split(""),
       correctGuesses: ["t"],
       incorrectGuesses: [],
+      availablePartsOfSpeech: [],
+      finished: false,
+      difficultySettings: {
+        maxCorpusCount:1,
+        minCorpusCount: 1,
+        maxDictionaryCount: 1,
+        maxLength: 1,
+        minDictionaryCount: 1,
+        minLength: 1,
+        selectedPartsOfSpeech: []
+      },
+      lost: false
     };
     const newGuess = "t";
     const expectedState = {
@@ -61,6 +96,16 @@ describe("gameReducer", () => {
       incorrectGuesses: initialState.incorrectGuesses,
       finished: false,
       lost: false,
+      difficultySettings: {
+        maxCorpusCount:1,
+        minCorpusCount: 1,
+        maxDictionaryCount: 1,
+        maxLength: 1,
+        minDictionaryCount: 1,
+        minLength: 1,
+        selectedPartsOfSpeech: []
+      },
+      availablePartsOfSpeech: [],
     };
     const result = gameReducer(initialState, actions.applyGuess(newGuess));
 
@@ -72,6 +117,18 @@ describe("gameReducer", () => {
       word: "test".split(""),
       correctGuesses: [],
       incorrectGuesses: [],
+      availablePartsOfSpeech: [],
+      finished: false,
+      difficultySettings: {
+        maxCorpusCount:1,
+        minCorpusCount: 1,
+        maxDictionaryCount: 1,
+        maxLength: 1,
+        minDictionaryCount: 1,
+        minLength: 1,
+        selectedPartsOfSpeech: []
+      },
+      lost: false
     };
     const newGuess = "z";
     const expectedState = {
@@ -80,6 +137,16 @@ describe("gameReducer", () => {
       incorrectGuesses: [...initialState.incorrectGuesses, newGuess],
       finished: false,
       lost: false,
+      difficultySettings: {
+        maxCorpusCount:1,
+        minCorpusCount: 1,
+        maxDictionaryCount: 1,
+        maxLength: 1,
+        minDictionaryCount: 1,
+        minLength: 1,
+        selectedPartsOfSpeech: []
+      },
+      availablePartsOfSpeech: [],
     };
 
     const result = gameReducer(initialState, actions.applyGuess(newGuess));
@@ -92,6 +159,18 @@ describe("gameReducer", () => {
       word: "test".split(""),
       correctGuesses: [],
       incorrectGuesses: ["z"],
+      availablePartsOfSpeech: [],
+      finished: false,
+      difficultySettings: {
+        maxCorpusCount:1,
+        minCorpusCount: 1,
+        maxDictionaryCount: 1,
+        maxLength: 1,
+        minDictionaryCount: 1,
+        minLength: 1,
+        selectedPartsOfSpeech: []
+      },
+      lost: false
     };
     const newGuess = "z";
     const expectedState = {
@@ -100,6 +179,16 @@ describe("gameReducer", () => {
       incorrectGuesses: initialState.incorrectGuesses,
       finished: false,
       lost: false,
+      difficultySettings: {
+        maxCorpusCount:1,
+        minCorpusCount: 1,
+        maxDictionaryCount: 1,
+        maxLength: 1,
+        minDictionaryCount: 1,
+        minLength: 1,
+        selectedPartsOfSpeech: []
+      },
+      availablePartsOfSpeech: [],
     };
 
     const result = gameReducer(initialState, actions.applyGuess(newGuess));
@@ -112,6 +201,18 @@ describe("gameReducer", () => {
       word: "test".split(""),
       correctGuesses: ["t", "e"],
       incorrectGuesses: [],
+      availablePartsOfSpeech: [],
+      finished: false,
+      difficultySettings: {
+        maxCorpusCount:1,
+        minCorpusCount: 1,
+        maxDictionaryCount: 1,
+        maxLength: 1,
+        minDictionaryCount: 1,
+        minLength: 1,
+        selectedPartsOfSpeech: []
+      },
+      lost: false
     };
     const newGuess = "s";
     const expectedState = {
@@ -120,6 +221,16 @@ describe("gameReducer", () => {
       incorrectGuesses: [],
       finished: true,
       lost: false,
+      difficultySettings: {
+        maxCorpusCount:1,
+        minCorpusCount: 1,
+        maxDictionaryCount: 1,
+        maxLength: 1,
+        minDictionaryCount: 1,
+        minLength: 1,
+        selectedPartsOfSpeech: []
+      },
+      availablePartsOfSpeech: [],
     };
 
     const result = gameReducer(initialState, actions.applyGuess(newGuess));
@@ -132,6 +243,18 @@ describe("gameReducer", () => {
       word: "zzzz".split(""),
       correctGuesses: [],
       incorrectGuesses: ["a", "b", "c", "d", "e", "f", "g"],
+      availablePartsOfSpeech: [],
+      finished: false,
+      difficultySettings: {
+        maxCorpusCount:1,
+        minCorpusCount: 1,
+        maxDictionaryCount: 1,
+        maxLength: 1,
+        minDictionaryCount: 1,
+        minLength: 1,
+        selectedPartsOfSpeech: []
+      },
+      lost: false
     };
     const newGuess = "h";
     const expectedState = {
@@ -140,6 +263,16 @@ describe("gameReducer", () => {
       incorrectGuesses: [...initialState.incorrectGuesses, newGuess],
       finished: true,
       lost: true,
+      availablePartsOfSpeech: [],
+      difficultySettings: {
+        maxCorpusCount:1,
+        minCorpusCount: 1,
+        maxDictionaryCount: 1,
+        maxLength: 1,
+        minDictionaryCount: 1,
+        minLength: 1,
+        selectedPartsOfSpeech: []
+      }
     };
 
     const result = gameReducer(initialState, actions.applyGuess(newGuess));

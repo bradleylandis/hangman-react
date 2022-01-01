@@ -1,6 +1,15 @@
 const apiKey = "503890e5c73712c79d3090fb3840a8220541b1c15372a08d8";
 
-export const fetchWord = async (settings) => {
+interface DifficultySettings {
+  selectedPartsOfSpeech: string[],
+  maxCorpusCount: number,
+  minDictionaryCount: number,
+  maxDictionaryCount: number,
+  minLength: number,
+  maxLength: number
+}
+
+export const fetchWord = async (settings: DifficultySettings) => {
   const {
     selectedPartsOfSpeech,
     maxCorpusCount,

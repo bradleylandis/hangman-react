@@ -1,12 +1,24 @@
-import * as React from "react";
 import serialize from "form-serialize";
-import PropTypes from "prop-types";
+
+interface DifficultySettingsProps {
+  difficultySettings: {
+    minLength: number,
+    maxLength: number,
+    selectedPartsOfSpeech: string[],
+    minCorpusCount: number,
+    maxCorpusCount: number,
+    minDictionaryCount: number,
+    maxDictionaryCount: number
+  },
+  availablePartsOfSpeech: string[],
+  onUpdate: (data: any) => void
+}
 
 const DifficultySettings = ({
   difficultySettings,
   availablePartsOfSpeech,
   onUpdate,
-}) => {
+}: DifficultySettingsProps) => {
   const {
     minLength,
     maxLength,
@@ -17,9 +29,9 @@ const DifficultySettings = ({
     maxDictionaryCount,
   } = difficultySettings;
 
-  const onSubmit = (event) => {
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = serialize(event.target, { hash: true, empty: true });
+    const data = serialize(event.target as HTMLFormElement, { hash: true, empty: true });
     onUpdate(data);
   };
 
@@ -86,20 +98,6 @@ const DifficultySettings = ({
       </fieldset>
     </form>
   );
-};
-
-DifficultySettings.propTypes = {
-  difficultySettings: PropTypes.shape({
-    minLength: PropTypes.number.isRequired,
-    maxLength: PropTypes.number.isRequired,
-    selectedPartsOfSpeech: PropTypes.arrayOf(PropTypes.string).isRequired,
-    minCorpusCount: PropTypes.number.isRequired,
-    maxCorpusCount: PropTypes.number.isRequired,
-    minDictionaryCount: PropTypes.number.isRequired,
-    maxDictionaryCount: PropTypes.number.isRequired,
-  }).isRequired,
-  availablePartsOfSpeech: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onUpdate: PropTypes.func.isRequired,
 };
 
 export default DifficultySettings;

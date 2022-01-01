@@ -23,11 +23,11 @@ const Game = () => {
   const word = useSelector(getWord);
 
   React.useEffect(() => {
-    const handleKeyPress = (e) => {
+    function handleKeyPress(this: HTMLDocument, e: KeyboardEvent) {
       captureGuess(e.key);
     };
 
-    const captureGuess = (guess) => {
+    const captureGuess = (guess: string) => {
       const normalizedGuess = guess.toLowerCase();
       if (
         !finished &&
@@ -40,10 +40,8 @@ const Game = () => {
   
     document.addEventListener("keypress", handleKeyPress);
     return () => document.removeEventListener("keypress", handleKeyPress);
-  }, []);
+  },);
 
-  
-  
   return (
     <div>
       <PictureDisplay numberOfIncorrectGuesses={incorrectGuesses.length} />
