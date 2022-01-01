@@ -1,7 +1,7 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions";
-import "../db";
+import "../Shared/db";
 import axios from "axios";
-import Game from "../models/Game";
+import Game from "../Shared/models/Game";
 
 const httpTrigger: AzureFunction = async function (
   context: Context,
