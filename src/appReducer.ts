@@ -10,7 +10,7 @@ const initialAppState = {
   isError: false
 }
 
-const appReducer = (state: AppState = initialAppState, action: Action) => {
+const appReducer = (state: AppState = initialAppState, action: Action<string>) => {
   switch (action.type) {
     case "SET_WORD":
       return {

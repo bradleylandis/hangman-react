@@ -3,7 +3,6 @@ import { getDifficultySettings } from "./reducers";
 import type { Dispatch } from "redux";
 import type {GlobalState} from './reducers';
 
-
 export interface ApplyGuessAction {
   type: "APPLY_GUESS",
   letter: string
@@ -14,7 +13,7 @@ export const applyGuess = (letter: string): ApplyGuessAction => ({
   letter: letter,
 });
 
-export const setWord = (word: string[]) => {
+export const setWord = (word: string) => {
   return {
     type: "SET_WORD",
     word: word,

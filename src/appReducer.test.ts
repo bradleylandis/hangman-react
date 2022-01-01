@@ -12,7 +12,7 @@ describe("appReducer", () => {
   it("returns isLoading true and isError false after SET_WORD", () => {
     const initialState = { isLoading: true, isError: true };
     const expectedState = { isLoading: false, isError: false };
-    const result = appReducer(initialState, actions.setWord(["t", "e", "s", "t"]));
+    const result = appReducer(initialState, actions.setWord("test"));
 
     expect(result).toEqual(expectedState);
   });

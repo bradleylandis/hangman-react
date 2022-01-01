@@ -50,7 +50,7 @@ interface SetWordAction {
 
 type GameAction = SetDifficultyAction | SetWordAction | ApplyGuessAction;
 
-interface DifficultySettings {
+export interface DifficultySettings {
   minLength: number,
   maxLength: number,
   selectedPartsOfSpeech: string[],

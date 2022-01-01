@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const apiKey = "503890e5c73712c79d3090fb3840a8220541b1c15372a08d8";
 
 interface DifficultySettings {
@@ -9,7 +11,7 @@ interface DifficultySettings {
   maxLength: number
 }
 
-export const fetchWord = async (settings: DifficultySettings) => {
+export const fetchWord = async (settings: DifficultySettings) : Promise<string> => {
   const {
     selectedPartsOfSpeech,
     maxCorpusCount,
@@ -19,11 +21,21 @@ export const fetchWord = async (settings: DifficultySettings) => {
     maxLength,
   } = settings;
 
-  const response = await fetch(
-    `https://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&includePartOfSpeech=${selectedPartsOfSpeech.join(
-      ","
-    )}&minCorpusCount=10000&maxCorpusCount=${maxCorpusCount}&minDictionaryCount=${minDictionaryCount}&maxDictionaryCount=${maxDictionaryCount}&minLength=${minLength}&maxLength=${maxLength}&api_key=${apiKey}`
+  const response = await axios.get<{word: string}>(
+    `https://api.wordnik.com/v4/words.json/randomWord`,
+    {
+      params: {
+        minCorpusCount: 10000,
+        maxCorpusCount: maxCorpusCount,
+        minDictionaryCount: minDictionaryCount,
+        maxDictionaryCount: maxDictionaryCount,
+        minLength: minLength,
+        maxLength: maxLength,
+        hasDictionaryDef: true,
+        includePartOfSpeech: selectedPartsOfSpeech.join(','),
+        api_key: apiKey
+      }
+    }
   );
-  const data = await response.json();
-  return data.word;
+  return response.data.word;
 };

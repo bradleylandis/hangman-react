@@ -1,4 +1,4 @@
-import serialize from "form-serialize";
+import type {DifficultySettings as DifficultySettingsType} from './gameReducer'
 
 interface DifficultySettingsProps {
   difficultySettings: {
@@ -11,7 +11,7 @@ interface DifficultySettingsProps {
     maxDictionaryCount: number
   },
   availablePartsOfSpeech: string[],
-  onUpdate: (data: any) => void
+  onUpdate: (data: DifficultySettingsType) => void
 }
 
 const DifficultySettings = ({
@@ -31,8 +31,6 @@ const DifficultySettings = ({
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = serialize(event.target as HTMLFormElement, { hash: true, empty: true });
-    onUpdate(data);
   };
 
   return (
