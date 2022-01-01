@@ -1,7 +1,7 @@
 interface CongratulationsProps {
-  word: string[],
-  startOver: () => void,
-  lost: boolean
+  word: string[];
+  startOver: () => void;
+  lost: boolean;
 }
 
 const Congratulations = ({ word, startOver, lost }: CongratulationsProps) => {
