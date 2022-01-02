@@ -3,7 +3,6 @@ import { getDifficultySettings } from "./reducers";
 import type { Dispatch } from "redux";
 import type { GlobalState } from "./reducers";
 import { DifficultySettings } from "./gameReducer";
-import { stringify } from "querystring";
 
 export interface ApplyGuessAction {
   type: "APPLY_GUESS";
