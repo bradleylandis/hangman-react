@@ -25,3 +25,4 @@ export const getCorrectGuesses = (state: GlobalState) =>
   fromGame.getCorrectGuesses(state.game);
 export const getIncorrectGuesses = (state: GlobalState) =>
   fromGame.getIncorrectGuesses(state.game);
+export const getId = (state: GlobalState) => fromGame.getId(state.game);

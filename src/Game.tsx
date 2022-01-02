@@ -11,9 +11,13 @@ import {
   getIncorrectGuesses,
   getFinished,
   getLost,
+  getId,
 } from "./reducers";
+import { registerGuess } from "./api";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Game = () => {
+  const { user } = useAuth0();
   const dispatch = useDispatch();
   const { applyGuess, startGame } = actions;
   const correctGuesses = useSelector(getCorrectGuesses);
@@ -21,13 +25,15 @@ const Game = () => {
   const finished = useSelector(getFinished);
   const lost = useSelector(getLost);
   const word = useSelector(getWord);
+  const gameId = useSelector(getId);
 
   React.useEffect(() => {
-    function handleKeyPress(this: HTMLDocument, e: KeyboardEvent) {
-      captureGuess(e.key);
+    async function handleKeyPress(this: HTMLDocument, e: KeyboardEvent) {
+      await captureGuess(e.key);
     }
 
-    const captureGuess = (guess: string) => {
+    const captureGuess = async (guess: string) => {
+      await registerGuess(gameId!, guess);
       const normalizedGuess = guess.toLowerCase();
       if (
         !finished &&
@@ -49,7 +55,7 @@ const Game = () => {
         <Congratulations
           lost={lost}
           word={word}
-          startOver={() => dispatch(startGame())}
+          startOver={() => dispatch(startGame(user?.sub!))}
         />
       ) : (
         <div>

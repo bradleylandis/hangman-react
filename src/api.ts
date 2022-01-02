@@ -9,9 +9,10 @@ interface DifficultySettings {
   maxLength: number;
 }
 
-export const fetchWord = async (
+export const startGame = async (
+  playerId: string,
   settings: DifficultySettings
-): Promise<string> => {
+): Promise<{ id: string; word: string }> => {
   const {
     selectedPartsOfSpeech,
     maxCorpusCount,
@@ -21,8 +22,9 @@ export const fetchWord = async (
     maxLength,
   } = settings;
 
-  const response = await axios.get<{ word: string }>(`/api/StartGame`, {
-    params: {
+  const response = await axios.post<{ id: string; word: string }>(
+    `/api/StartGame`,
+    {
       minCorpusCount: 10000,
       maxCorpusCount: maxCorpusCount,
       minDictionaryCount: minDictionaryCount,
@@ -31,7 +33,15 @@ export const fetchWord = async (
       maxLength: maxLength,
       hasDictionaryDef: true,
       includePartOfSpeech: selectedPartsOfSpeech.join(","),
-    },
-  });
-  return response.data.word;
+      playerId: playerId,
+    }
+  );
+  return response.data;
+};
+
+export const registerGuess = async (
+  gameId: string,
+  guess: string
+): Promise<void> => {
+  await axios.post(`/api/RegisterGuess`, { gameId, guess });
 };

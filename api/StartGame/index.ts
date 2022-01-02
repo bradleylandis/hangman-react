@@ -31,14 +31,14 @@ const httpTrigger: AzureFunction = async function (
   var game = new Game({
     word: response.word,
     status: "in progress",
-    playerId: 1,
-    startedAt: Date.now(),
+    playerId: req.body.playerId,
+    startedAt: new Date(Date.now()),
   });
   await game.save();
 
   context.res = {
     // status: 200, /* Defaults to 200 */
-    body: { word: response.word },
+    body: { id: game._id, word: response.word },
   };
 };
 

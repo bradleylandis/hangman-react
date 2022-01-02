@@ -53,6 +53,7 @@ export interface DifficultySettings {
 }
 
 export interface GameState {
+  id?: string;
   availablePartsOfSpeech: string[];
   difficultySettings: DifficultySettings;
   word: string[];
@@ -64,7 +65,10 @@ export interface GameState {
 
 type GameAction = SetDifficultyAction | SetWordAction | ApplyGuessAction;
 
-const gameReducer = (state: GameState = defaultState, action: GameAction) => {
+const gameReducer = (
+  state: GameState = defaultState,
+  action: GameAction
+): GameState => {
   const maxIncorrectGuesses = 7;
   switch (action.type) {
     case "SET_DIFFICULTY":
@@ -73,6 +77,7 @@ const gameReducer = (state: GameState = defaultState, action: GameAction) => {
       return {
         ...state,
         word: action.word.toLowerCase().split(""),
+        id: action.id,
         correctGuesses: [],
         incorrectGuesses: [],
         finished: false,
@@ -118,3 +123,4 @@ export const getLost = (state: GameState) => state.lost;
 export const getFinished = (state: GameState) => state.finished;
 export const getIncorrectGuesses = (state: GameState) => state.incorrectGuesses;
 export const getCorrectGuesses = (state: GameState) => state.correctGuesses;
+export const getId = (state: GameState) => state.id;

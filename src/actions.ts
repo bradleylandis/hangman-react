@@ -1,8 +1,9 @@
-import { fetchWord } from "./api";
+import * as api from "./api";
 import { getDifficultySettings } from "./reducers";
 import type { Dispatch } from "redux";
 import type { GlobalState } from "./reducers";
 import { DifficultySettings } from "./gameReducer";
+import { stringify } from "querystring";
 
 export interface ApplyGuessAction {
   type: "APPLY_GUESS";
@@ -17,12 +18,14 @@ export const applyGuess = (letter: string): ApplyGuessAction => ({
 export interface SetWordAction {
   type: "SET_WORD";
   word: string;
+  id: string;
 }
 
-export const setWord = (word: string): SetWordAction => {
+export const setWord = (word: string, id: string): SetWordAction => {
   return {
     type: "SET_WORD",
     word: word,
+    id: id,
   };
 };
 
@@ -39,11 +42,15 @@ export const startLoading = () => {
 };
 
 export const startGame =
-  () => async (dispatch: Dispatch, getState: () => GlobalState) => {
+  (playerId: string) =>
+  async (dispatch: Dispatch, getState: () => GlobalState) => {
     dispatch(startLoading());
     try {
-      const word = await fetchWord(getDifficultySettings(getState()));
-      dispatch(setWord(word));
+      const { word, id } = await api.startGame(
+        playerId,
+        getDifficultySettings(getState())
+      );
+      dispatch(setWord(word, id));
     } catch (e) {
       console.error(e);
       dispatch(setError());

@@ -9,15 +9,17 @@ import * as actions from "./actions";
 import Login from "./Login";
 import Logout from "./Logout";
 import User from "./User";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const App = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoading);
   const isError = useSelector(getIsError);
+  const { user } = useAuth0();
 
   React.useEffect(() => {
-    dispatch(actions.startGame());
-  }, [dispatch]);
+    dispatch(actions.startGame(user?.sub!));
+  }, [dispatch, user]);
 
   return (
     <div className="App">
@@ -29,7 +31,7 @@ const App = () => {
       {isLoading ? (
         <Loading />
       ) : isError ? (
-        <Error tryAgain={() => dispatch(actions.startGame())} />
+        <Error tryAgain={() => dispatch(actions.startGame(user?.sub!))} />
       ) : (
         <Game />
       )}

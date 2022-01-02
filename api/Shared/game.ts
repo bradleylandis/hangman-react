@@ -1,17 +1,23 @@
 import { model, Schema } from "mongoose";
 
-interface Game {
+export interface GameType {
   playerId: string;
   word: string;
   status: "won" | "lost" | "in progress";
   startedAt: Date;
+  endedAt: Date;
+  correctGuesses: string[];
+  incorrectGuesses: string[];
 }
 
-const gameSchema = new Schema<Game>({
+const gameSchema = new Schema<GameType>({
   playerId: String,
   word: String,
   status: String,
   startedAt: Date,
+  endedAt: Date,
+  correctGuesses: [String],
+  incorrectGuesses: [String],
 });
 
-export default model("Game", gameSchema);
+export default model<GameType>("Game", gameSchema);
