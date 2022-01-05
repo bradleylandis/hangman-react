@@ -1,5 +1,17 @@
 import axios from "axios";
 
+axios.interceptors.request.use((config) => {
+  if (!config?.headers) return;
+
+  const accessToken = localStorage.getItem("accessToken");
+
+  if (accessToken) {
+    config.headers["Authorization"] = `Bearer ${accessToken}`;
+  }
+
+  return config;
+});
+
 interface DifficultySettings {
   selectedPartsOfSpeech: string[];
   maxCorpusCount: number;
@@ -43,5 +55,8 @@ export const registerGuess = async (
   gameId: string,
   guess: string
 ): Promise<void> => {
-  await axios.post(`/api/RegisterGuess`, { gameId, guess });
+  await axios.post(`/api/RegisterGuess`, {
+    gameId,
+    guess,
+  });
 };

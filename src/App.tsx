@@ -15,7 +15,20 @@ const App = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoading);
   const isError = useSelector(getIsError);
-  const { user } = useAuth0();
+  const { user, getAccessTokenSilently } = useAuth0();
+
+  React.useEffect(() => {
+    (async () => {
+      if (user) {
+        const accessToken = await getAccessTokenSilently({
+          audience: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/api/v2/`,
+        });
+        localStorage.setItem("accessToken", accessToken);
+      } else {
+        localStorage.removeItem("accessToken");
+      }
+    })();
+  }, [user, getAccessTokenSilently]);
 
   React.useEffect(() => {
     dispatch(actions.startGame(user?.sub!));
