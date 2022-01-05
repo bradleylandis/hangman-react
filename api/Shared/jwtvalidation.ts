@@ -6,13 +6,15 @@ import {
 import { JwksClient } from "jwks-rsa";
 
 export const verify = async (jwtToken): Promise<JwtPayload> => {
-  var client = new JwksClient({
-    jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`,
+  const url = `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`;
+  console.log(`url: ${url}`);
+  const client = new JwksClient({
+    jwksUri: url,
   });
 
   const getKey: GetPublicKeyOrSecret = (header, callback) => {
     client.getSigningKey(header.kid, function (err, key) {
-      var signingKey = key["publicKey"] || key["rsaPublicKey"];
+      const signingKey = key["publicKey"] || key["rsaPublicKey"];
       callback(err, signingKey);
     });
   };
