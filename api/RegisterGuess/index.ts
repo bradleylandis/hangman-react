@@ -13,7 +13,8 @@ const httpTrigger: AzureFunction = async function (
   const guess = req?.body?.guess;
 
   const authHeader = req?.headers?.authorization;
-  console.log(`authHeader: ${authHeader}`);
+  context.log(`authHeader: ${authHeader}`);
+  context.log(`domain: ${process.env.AUTH0_DOMAIN}`);
   let userId: string;
   if (authHeader) {
     const token = authHeader.split(" ")[1];
