@@ -18,7 +18,7 @@ const httpTrigger: AzureFunction = async function (
   let userId: string;
   if (authHeader) {
     const token = authHeader.split(" ")[1];
-    const result = await verify(token);
+    const result = await verify(context, token);
     userId = result.sub;
   }
 
