@@ -13,7 +13,6 @@ export const verify = async (
   jwtToken: string
 ): Promise<JwtPayload> => {
   const url = `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`;
-  context.log(`url: ${url}`);
   const client = new JwksClient({
     jwksUri: url,
   });
@@ -29,18 +28,14 @@ export const verify = async (
         callback(err, null);
         return;
       }
-      const signingKey = key ? key["publicKey"] || key["rsaPublicKey"] : "";
+      const signingKey = key["publicKey"] || key["rsaPublicKey"];
       callback(null, signingKey);
     });
   };
 
   return new Promise((resolve, reject) => {
-    jsonVerify(jwtToken, getKey, verifyOptions, (err, result) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(result);
-      }
-    });
+    jsonVerify(jwtToken, getKey, verifyOptions, (err, result) =>
+      err ? reject(err) : resolve(result)
+    );
   });
 };
