@@ -3,7 +3,6 @@ import {
   GetPublicKeyOrSecret,
   JwtPayload,
   verify as jsonVerify,
-  decode,
   VerifyOptions,
 } from "jsonwebtoken";
 import { JwksClient } from "jwks-rsa";
@@ -18,7 +17,7 @@ export const verify = async (
   });
 
   var verifyOptions: VerifyOptions = {
-    algorithms: ["RS256"],
+    algorithms: ["HS256"],
   };
 
   const getKey: GetPublicKeyOrSecret = (header, callback) => {

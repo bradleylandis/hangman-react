@@ -14,6 +14,7 @@ const httpTrigger: AzureFunction = async function (
 
   const authHeader = req?.headers?.authorization;
   context.log(`authHeader: ${authHeader}`);
+  context.log(`context authHeader: ${context?.req?.headers?.authorization}`);
   context.log(`domain: ${process.env.AUTH0_DOMAIN}`);
   let userId: string;
   if (authHeader) {
