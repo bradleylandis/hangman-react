@@ -4,6 +4,7 @@ import {
   JwtPayload,
   verify as jsonVerify,
   VerifyOptions,
+  decode,
 } from "jsonwebtoken";
 import { JwksClient } from "jwks-rsa";
 
@@ -19,6 +20,10 @@ export const verify = async (
   var verifyOptions: VerifyOptions = {
     algorithms: ["HS256"],
   };
+
+  const decoded = decode(jwtToken);
+
+  context.log(`decoded token: ${JSON.stringify(decoded)}`);
 
   const getKey: GetPublicKeyOrSecret = (header, callback) => {
     context.log(`header: ${JSON.stringify(header)}`);
