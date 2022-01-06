@@ -3,6 +3,8 @@ import {
   GetPublicKeyOrSecret,
   JwtPayload,
   verify as jsonVerify,
+  decode,
+  VerifyOptions,
 } from "jsonwebtoken";
 import { JwksClient } from "jwks-rsa";
 
@@ -16,18 +18,24 @@ export const verify = async (
     jwksUri: url,
   });
 
+  var verifyOptions: VerifyOptions = {
+    algorithms: ["RS256"],
+  };
+
   const getKey: GetPublicKeyOrSecret = (header, callback) => {
-    context.log(`header.kid: ${header.kid}`);
+    context.log(`header: ${JSON.stringify(header)}`);
     client.getSigningKey(header.kid, function (err, key) {
-      context.log(`err: ${err}`);
-      context.log(`key: ${key}`);
-      const signingKey = key["publicKey"] || key["rsaPublicKey"];
-      callback(err, signingKey);
+      if (err) {
+        callback(err, null);
+        return;
+      }
+      const signingKey = key ? key["publicKey"] || key["rsaPublicKey"] : "";
+      callback(null, signingKey);
     });
   };
 
   return new Promise((resolve, reject) => {
-    jsonVerify(jwtToken, getKey, (err, result) => {
+    jsonVerify(jwtToken, getKey, verifyOptions, (err, result) => {
       if (err) {
         reject(err);
       } else {
