@@ -14,10 +14,8 @@ import {
   getId,
 } from "./reducers";
 import { registerGuess } from "./api";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const Game = () => {
-  const { user } = useAuth0();
   const dispatch = useDispatch();
   const { applyGuess, startGame } = actions;
   const correctGuesses = useSelector(getCorrectGuesses);
@@ -55,7 +53,7 @@ const Game = () => {
         <Congratulations
           lost={lost}
           word={word}
-          startOver={() => dispatch(startGame(user?.sub!))}
+          startOver={() => dispatch(startGame())}
         />
       ) : (
         <div>

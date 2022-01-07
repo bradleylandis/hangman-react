@@ -1,10 +1,14 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import React from "react";
+import * as React from "react";
+import { GetUserResponse } from "./api";
 
-function Profile() {
-  const { user, isAuthenticated } = useAuth0();
-
-  return isAuthenticated ? <div>Hello {user?.name}</div> : <React.Fragment />;
+interface ProfileProps {
+  user: GetUserResponse;
 }
 
+const Profile = ({ user }: ProfileProps) =>
+  user?.clientPrincipal ? (
+    <div>Hello {user?.clientPrincipal?.userDetails}</div>
+  ) : (
+    <React.Fragment />
+  );
 export default Profile;

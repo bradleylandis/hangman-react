@@ -1,17 +1,15 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import React from "react";
+import * as React from "react";
+import type { GetUserResponse } from "./api";
 
-function LoginButton() {
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
+interface LoginButtonProps {
+  user: GetUserResponse;
+}
 
-  return isAuthenticated ? (
+const LoginButton = ({ user }: LoginButtonProps) =>
+  user?.clientPrincipal ? (
     <React.Fragment />
   ) : (
-    <div>
-      <button onClick={loginWithRedirect}>Log in</button>
-      <button onClick={() => window.location.assign("/login")}>Log in</button>
-    </div>
+    <button onClick={() => window.location.assign("/login")}>Log in</button>
   );
-}
 
 export default LoginButton;

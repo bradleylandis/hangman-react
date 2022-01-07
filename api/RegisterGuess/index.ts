@@ -2,7 +2,7 @@ import { AzureFunction, Context, HttpRequest } from "@azure/functions";
 import "../Shared/db";
 import Game from "../Shared/game";
 import type { GameType } from "../Shared/game";
-import { verify } from "../Shared/jwtvalidation";
+import { getUserId } from "../Shared/user";
 
 const httpTrigger: AzureFunction = async function (
   context: Context,
@@ -12,16 +12,8 @@ const httpTrigger: AzureFunction = async function (
   const gameId = req?.body?.gameId;
   const guess = req?.body?.guess;
 
-  const authHeader = req?.headers?.authorization;
-  context.log(`authHeader: ${authHeader}`);
-  context.log(`context authHeader: ${context?.req?.headers?.authorization}`);
-  context.log(`domain: ${process.env.AUTH0_DOMAIN}`);
-  let userId: string;
-  if (authHeader) {
-    const token = authHeader.split(" ")[1];
-    const result = await verify(context, token);
-    userId = result.sub;
-  }
+  const userId = getUserId(req.headers["x-ms-client-principal"], context);
+  context.log(userId);
 
   const game = await Game.findById(gameId);
   if (game.playerId !== userId) {

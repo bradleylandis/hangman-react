@@ -1,17 +1,5 @@
 import axios from "axios";
 
-axios.interceptors.request.use((config) => {
-  if (!config?.headers) return;
-
-  const accessToken = localStorage.getItem("accessToken");
-
-  if (accessToken) {
-    config.headers["Authorization"] = `Bearer ${accessToken}`;
-  }
-
-  return config;
-});
-
 interface DifficultySettings {
   selectedPartsOfSpeech: string[];
   maxCorpusCount: number;
@@ -21,8 +9,26 @@ interface DifficultySettings {
   maxLength: number;
 }
 
+export type GetUserResponse = {
+  clientPrincipal: {
+    userId: string;
+    identityProvider: string;
+    userDetails: string;
+  };
+} | null;
+
+export interface ApplyGuessResponse {
+  id: string;
+  word: string;
+}
+
+export const getUser = async (): Promise<GetUserResponse> => {
+  const response = await axios.get<GetUserResponse>("/user");
+  console.log(response.data);
+  return response.data;
+};
+
 export const startGame = async (
-  playerId: string,
   settings: DifficultySettings
 ): Promise<{ id: string; word: string }> => {
   const {
@@ -34,20 +40,16 @@ export const startGame = async (
     maxLength,
   } = settings;
 
-  const response = await axios.post<{ id: string; word: string }>(
-    `/api/StartGame`,
-    {
-      minCorpusCount: 10000,
-      maxCorpusCount: maxCorpusCount,
-      minDictionaryCount: minDictionaryCount,
-      maxDictionaryCount: maxDictionaryCount,
-      minLength: minLength,
-      maxLength: maxLength,
-      hasDictionaryDef: true,
-      includePartOfSpeech: selectedPartsOfSpeech.join(","),
-      playerId: playerId,
-    }
-  );
+  const response = await axios.post<ApplyGuessResponse>(`/api/StartGame`, {
+    minCorpusCount: 10000,
+    maxCorpusCount: maxCorpusCount,
+    minDictionaryCount: minDictionaryCount,
+    maxDictionaryCount: maxDictionaryCount,
+    minLength: minLength,
+    maxLength: maxLength,
+    hasDictionaryDef: true,
+    includePartOfSpeech: selectedPartsOfSpeech.join(","),
+  });
   return response.data;
 };
 

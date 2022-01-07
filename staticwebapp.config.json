@@ -2,11 +2,15 @@
     "routes": [
         {
             "route": "/login",
-            "redirect": "/.auth/login/auth0"
+            "redirect": "/.auth/login/github"
         },
         {
             "route": "/logout",
             "redirect": "/.auth/logout"
+        },
+        {
+            "route": "/user",
+            "redirect": "/.auth/me"
         }
     ],
     "auth": {

@@ -1,23 +1,15 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import React from "react";
+import * as React from "react";
+import { GetUserResponse } from "./api";
 
-function LogoutButton() {
-  const { isAuthenticated, logout } = useAuth0();
+interface LogoutButtonProps {
+  user: GetUserResponse;
+}
 
-  return isAuthenticated ? (
-    <div>
-      <button
-        onClick={() => {
-          logout({ returnTo: window.location.origin });
-        }}
-      >
-        Log out
-      </button>
-      <button onClick={() => window.location.assign("/logout")}>Log out</button>
-    </div>
+const LogoutButton = ({ user }: LogoutButtonProps) =>
+  user?.clientPrincipal ? (
+    <button onClick={() => window.location.assign("/logout")}>Log out</button>
   ) : (
     <React.Fragment />
   );
-}
 
 export default LogoutButton;

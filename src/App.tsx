@@ -9,43 +9,35 @@ import * as actions from "./actions";
 import Login from "./Login";
 import Logout from "./Logout";
 import User from "./User";
-import { useAuth0 } from "@auth0/auth0-react";
+import { getUser } from "./api";
+import type { GetUserResponse } from "./api";
+import { setDefaultResultOrder } from "dns/promises";
 
 const App = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoading);
   const isError = useSelector(getIsError);
-  const { user, getAccessTokenSilently } = useAuth0();
+  const [user, setUser] = React.useState<GetUserResponse | null>(null);
 
   React.useEffect(() => {
+    dispatch(actions.startGame());
     (async () => {
-      if (user) {
-        const accessToken = await getAccessTokenSilently({
-          audience: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/api/v2/`,
-        });
-        localStorage.setItem("accessToken", accessToken);
-      } else {
-        localStorage.removeItem("accessToken");
-      }
+      const u = await getUser();
+      setUser(u);
     })();
-  }, [user, getAccessTokenSilently]);
-
-  React.useEffect(() => {
-    dispatch(actions.startGame(user?.sub!));
-  }, [dispatch, user]);
+  }, [dispatch]);
 
   return (
     <div className="App">
       <div>
-        <a href="/.auth/login/Auth0">Login</a>
-        <Login />
-        <Logout />
-        <User />
+        <Login user={user} />
+        <Logout user={user} />
+        <User user={user} />
       </div>
       {isLoading ? (
         <Loading />
       ) : isError ? (
-        <Error tryAgain={() => dispatch(actions.startGame(user?.sub!))} />
+        <Error tryAgain={() => dispatch(actions.startGame())} />
       ) : (
         <Game />
       )}

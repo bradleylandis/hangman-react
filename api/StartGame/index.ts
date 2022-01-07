@@ -2,6 +2,7 @@ import { AzureFunction, Context, HttpRequest } from "@azure/functions";
 import "../Shared/db";
 import axios from "axios";
 import Game from "../Shared/game";
+import { getUserId } from "../Shared/user";
 
 const httpTrigger: AzureFunction = async function (
   context: Context,
@@ -28,10 +29,13 @@ const httpTrigger: AzureFunction = async function (
   };
   const response = await fetchWord(defaultDifficultySettings);
 
+  const userId = getUserId(req.headers["x-ms-client-principal"], context);
+  context.log(userId);
+
   var game = new Game({
     word: response.word,
     status: "in progress",
-    playerId: req.body.playerId,
+    playerId: userId,
     startedAt: new Date(Date.now()),
   });
   await game.save();
