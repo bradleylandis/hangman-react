@@ -11,7 +11,6 @@ import Logout from "./Logout";
 import User from "./User";
 import { getUser } from "./api";
 import type { GetUserResponse } from "./api";
-import { setDefaultResultOrder } from "dns/promises";
 
 const App = () => {
   const dispatch = useDispatch();
