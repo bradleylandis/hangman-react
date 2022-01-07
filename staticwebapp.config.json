@@ -1,8 +1,18 @@
 {
+    "routes": [
+        {
+            "route": "/login",
+            "redirect": "/.auth/login/auth0"
+        },
+        {
+            "route": "/logout",
+            "redirect": "/.auth/logout"
+        }
+    ],
     "auth": {
       "identityProviders": {
         "customOpenIdConnectProviders": {
-          "myProvider": {
+          "auth0": {
             "registration": {
               "clientIdSettingName": "AUTH0_CLIENT_ID",
               "clientCredential": {

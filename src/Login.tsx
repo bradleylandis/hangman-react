@@ -7,7 +7,10 @@ function LoginButton() {
   return isAuthenticated ? (
     <React.Fragment />
   ) : (
-    <button onClick={loginWithRedirect}>Log in</button>
+    <div>
+      <button onClick={loginWithRedirect}>Log in</button>
+      <button onClick={() => window.location.assign("/login")}>Log in</button>
+    </div>
   );
 }
 
