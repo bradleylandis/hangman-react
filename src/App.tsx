@@ -37,6 +37,7 @@ const App = () => {
   return (
     <div className="App">
       <div>
+        <a href="/.auth/login/Auth0">Login</a>
         <Login />
         <Logout />
         <User />
