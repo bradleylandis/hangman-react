@@ -1,0 +1,24 @@
+{
+    "auth": {
+      "identityProviders": {
+        "customOpenIdConnectProviders": {
+          "myProvider": {
+            "registration": {
+              "clientIdSettingName": "AUTH0_CLIENT_ID",
+              "clientCredential": {
+                "clientSecretSettingName": "AUTH0_CLIENT_SECRET"
+              },
+              "openIdConnectConfiguration": {
+                "wellKnownOpenIdConfiguration": "https://bradleylandis.us.auth0.com/.well-known/openid-configuration"
+              }
+            },
+            "login": {
+              "nameClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+              "scopes": [],
+              "loginParameterNames": []
+            }
+          }
+        }
+      }
+    }
+  }
