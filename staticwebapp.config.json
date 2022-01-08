@@ -2,7 +2,7 @@
     "routes": [
         {
             "route": "/login",
-            "redirect": "/.auth/login/github"
+            "redirect": "/.auth/login/auth0"
         },
         {
             "route": "/logout",
@@ -11,6 +11,30 @@
         {
             "route": "/user",
             "redirect": "/.auth/me"
+        },
+        {
+          "route": "/.auth/login/twitter",
+          "statusCode": 404
+        },
+        {
+          "route": "/.auth/login/facebook",
+          "statusCode": 404
+        },
+        {
+          "route": "/.auth/login/github",
+          "statusCode": 404
+        },
+        {
+          "route": "/.auth/login/aad",
+          "statusCode": 404
+        },
+        {
+          "route": "/.auth/login/apple",
+          "statusCode": 404
+        },
+        {
+          "route": "/.auth/login/google",
+          "statusCode": 404
         }
     ],
     "auth": {
