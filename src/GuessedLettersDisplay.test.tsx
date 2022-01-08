@@ -9,10 +9,10 @@ describe("GuessedLettersDisplay", () => {
     const letterA = screen.getByText("a");
     expect(letterA).toBeInTheDocument();
 
-    const letterB = screen.getByText("a");
+    const letterB = screen.getByText("b");
     expect(letterB).toBeInTheDocument();
 
-    const letterC = screen.getByText("a");
+    const letterC = screen.getByText("c");
     expect(letterC).toBeInTheDocument();
   });
 });
