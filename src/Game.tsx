@@ -22,6 +22,9 @@ const Game = ({ id, currentWord, startGame, setCurrentWord }: GameProps) => {
     }
 
     const captureGuess = async (guess: string) => {
+      if (currentWord.includes(guess) || incorrectGuesses.includes(guess))
+        return;
+
       const gameState = await registerGuess(id, guess);
       setCurrentWord(gameState.word);
       setIncorrectGuesses(gameState.incorrectGuesses);
