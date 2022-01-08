@@ -1,12 +1,12 @@
 import * as React from "react";
-import { GetUserResponse } from "./api";
+import { LoggedInUser } from "./api";
 
 interface LogoutButtonProps {
-  user: GetUserResponse;
+  user: LoggedInUser;
 }
 
 const LogoutButton = ({ user }: LogoutButtonProps) =>
-  user?.clientPrincipal ? (
+  user ? (
     <button onClick={() => window.location.assign("/logout")}>Log out</button>
   ) : (
     <React.Fragment />

@@ -8,13 +8,17 @@ interface DifficultySettings {
   minLength: number;
   maxLength: number;
 }
+export type LoggedInUser =
+  | {
+      userId: string;
+      identityProvider: string;
+      userDetails: string;
+    }
+  | null
+  | undefined;
 
-export type GetUserResponse = {
-  clientPrincipal: {
-    userId: string;
-    identityProvider: string;
-    userDetails: string;
-  };
+type GetUserResponse = {
+  clientPrincipal: LoggedInUser;
 } | null;
 
 export interface ApplyGuessResponse {
@@ -22,10 +26,9 @@ export interface ApplyGuessResponse {
   word: string;
 }
 
-export const getUser = async (): Promise<GetUserResponse> => {
+export const getUser = async (): Promise<LoggedInUser> => {
   const response = await axios.get<GetUserResponse>("/user");
-  console.log(response.data);
-  return response.data;
+  return response.data?.clientPrincipal;
 };
 
 export const startGame = async (

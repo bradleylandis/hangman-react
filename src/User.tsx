@@ -1,14 +1,10 @@
 import * as React from "react";
-import { GetUserResponse } from "./api";
+import { LoggedInUser } from "./api";
 
 interface ProfileProps {
-  user: GetUserResponse;
+  user: LoggedInUser;
 }
 
 const Profile = ({ user }: ProfileProps) =>
-  user?.clientPrincipal ? (
-    <div>Hello {user?.clientPrincipal?.userDetails}</div>
-  ) : (
-    <React.Fragment />
-  );
+  user ? <div>Hello {user.userDetails}</div> : <React.Fragment />;
 export default Profile;

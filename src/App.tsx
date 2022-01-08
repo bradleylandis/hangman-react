@@ -10,13 +10,13 @@ import Login from "./Login";
 import Logout from "./Logout";
 import User from "./User";
 import { getUser } from "./api";
-import type { GetUserResponse } from "./api";
+import type { LoggedInUser } from "./api";
 
 const App = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoading);
   const isError = useSelector(getIsError);
-  const [user, setUser] = React.useState<GetUserResponse | null>(null);
+  const [user, setUser] = React.useState<LoggedInUser>(null);
 
   React.useEffect(() => {
     dispatch(actions.startGame());
