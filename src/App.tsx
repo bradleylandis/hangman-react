@@ -14,8 +14,8 @@ const App = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [isError, setIsError] = React.useState(false);
   const [user, setUser] = React.useState<LoggedInUser>(null);
-  const [currentWord, setCurrentWord] = React.useState<string>();
-  const [id, setId] = React.useState<string>();
+  const [currentWord, setCurrentWord] = React.useState("");
+  const [id, setId] = React.useState("");
 
   const startGame = React.useCallback(async () => {
     setIsLoading(true);
@@ -75,8 +75,8 @@ const App = () => {
           <Error tryAgain={() => startGame()} />
         ) : (
           <Game
-            id={id!}
-            currentWord={currentWord!}
+            id={id}
+            currentWord={currentWord}
             startGame={() => startGame()}
             setCurrentWord={(word: string) => setCurrentWord(word)}
           />
