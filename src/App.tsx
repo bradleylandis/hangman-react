@@ -38,6 +38,7 @@ const App = () => {
       maxCorpusCount: -1,
       minDictionaryCount: 1,
       maxDictionaryCount: -1,
+      hasDictionaryDef: true,
     };
 
     try {

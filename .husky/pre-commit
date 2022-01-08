@@ -1,9 +1,12 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+#npm run lint
 npm run test -- --watchAll=false
 npm run build
 
 cd api
 
+npm run lint
+npm run test -- --watchAll=false
 npm run build

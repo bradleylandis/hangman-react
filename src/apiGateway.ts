@@ -2,11 +2,13 @@ import axios from "axios";
 
 interface DifficultySettings {
   includePartsOfSpeech: string[];
+  minCorpusCount: number;
   maxCorpusCount: number;
   minDictionaryCount: number;
   maxDictionaryCount: number;
   minLength: number;
   maxLength: number;
+  hasDictionaryDef: boolean;
 }
 export type LoggedInUser =
   | {
@@ -21,7 +23,7 @@ type GetUserResponse = {
   clientPrincipal: LoggedInUser;
 } | null;
 
-export interface ApplyGuessResponse {
+export interface StartGameResponse {
   id: string;
   currentWord: string;
 }
@@ -33,26 +35,8 @@ export const getUser = async (): Promise<LoggedInUser> => {
 
 export const startGame = async (
   settings: DifficultySettings
-): Promise<ApplyGuessResponse> => {
-  const {
-    includePartsOfSpeech,
-    maxCorpusCount,
-    minDictionaryCount,
-    maxDictionaryCount,
-    minLength,
-    maxLength,
-  } = settings;
-
-  const response = await axios.post<ApplyGuessResponse>(`/api/game`, {
-    minCorpusCount: 10000,
-    maxCorpusCount: maxCorpusCount,
-    minDictionaryCount: minDictionaryCount,
-    maxDictionaryCount: maxDictionaryCount,
-    minLength: minLength,
-    maxLength: maxLength,
-    hasDictionaryDef: true,
-    includePartsOfSpeech: includePartsOfSpeech,
-  });
+): Promise<StartGameResponse> => {
+  const response = await axios.post<StartGameResponse>(`/api/game`, settings);
   return response.data;
 };
 
