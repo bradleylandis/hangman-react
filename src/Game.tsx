@@ -3,19 +3,17 @@ import PictureDisplay from "./PictureDisplay";
 import Congratulations from "./Congratulations";
 import WordDisplay from "./WordDisplay";
 import GuessedLettersDisplay from "./GuessedLettersDisplay";
-import { useDispatch, useSelector } from "react-redux";
-import * as actions from "./actions";
-import { getCurrentWord, getId } from "./reducers";
 import { registerGuess, Status } from "./api";
 
-const Game = () => {
-  const dispatch = useDispatch();
-  const { startGame } = actions;
-  const gameId = useSelector(getId);
+interface GameProps {
+  id: string;
+  currentWord: string;
+  startGame: Function;
+  setCurrentWord: Function;
+}
+
+const Game = ({ id, currentWord, startGame, setCurrentWord }: GameProps) => {
   const [incorrectGuesses, setIncorrectGuesses] = React.useState<string[]>([]);
-  const [currentWord, setCurrentWord] = React.useState(
-    useSelector(getCurrentWord)
-  );
   const [status, setStatus] = React.useState<Status>("in progress");
 
   React.useEffect(() => {
@@ -24,7 +22,7 @@ const Game = () => {
     }
 
     const captureGuess = async (guess: string) => {
-      const gameState = await registerGuess(gameId!, guess);
+      const gameState = await registerGuess(id, guess);
       setCurrentWord(gameState.word);
       setIncorrectGuesses(gameState.incorrectGuesses);
       setStatus(gameState.status);
@@ -41,7 +39,7 @@ const Game = () => {
         <Congratulations
           lost={status === "lost"}
           word={currentWord}
-          startOver={() => dispatch(startGame())}
+          startOver={() => startGame()}
         />
       ) : (
         <div>
