@@ -29,7 +29,12 @@ const httpTrigger: AzureFunction = async function (
 
     await game.save();
 
+    const newWord = game.word
+      .split("")
+      .map((letter) => (game.correctGuesses.includes(letter) ? letter : "_"));
+
     context.res = {
+      body: JSON.stringify({ word: newWord }),
       // status: 200, /* Defaults to 200 */
     };
   }
