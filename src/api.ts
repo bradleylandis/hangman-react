@@ -1,7 +1,7 @@
 import axios from "axios";
 
 interface DifficultySettings {
-  selectedPartsOfSpeech: string[];
+  includePartsOfSpeech: string[];
   maxCorpusCount: number;
   minDictionaryCount: number;
   maxDictionaryCount: number;
@@ -35,7 +35,7 @@ export const startGame = async (
   settings: DifficultySettings
 ): Promise<ApplyGuessResponse> => {
   const {
-    selectedPartsOfSpeech,
+    includePartsOfSpeech,
     maxCorpusCount,
     minDictionaryCount,
     maxDictionaryCount,
@@ -51,7 +51,7 @@ export const startGame = async (
     minLength: minLength,
     maxLength: maxLength,
     hasDictionaryDef: true,
-    includePartOfSpeech: selectedPartsOfSpeech.join(","),
+    includePartsOfSpeech: includePartsOfSpeech,
   });
   return response.data;
 };

@@ -8,8 +8,8 @@ import { registerGuess, Status } from "./api";
 interface GameProps {
   id: string;
   currentWord: string;
-  startGame: Function;
-  setCurrentWord: Function;
+  startGame: () => void;
+  setCurrentWord: (word: string) => void;
 }
 
 const Game = ({ id, currentWord, startGame, setCurrentWord }: GameProps) => {

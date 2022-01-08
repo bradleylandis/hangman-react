@@ -20,15 +20,30 @@ const App = () => {
   const startGame = React.useCallback(async () => {
     setIsLoading(true);
     setIsError(false);
+
+    const selectedPartsOfSpeech = [
+      "noun",
+      "verb",
+      "adjective",
+      "adverb",
+      "conjunction",
+      "verb-transitive",
+    ];
+
+    const defaultDifficultySettings = {
+      minLength: 7,
+      maxLength: 15,
+      includePartsOfSpeech: selectedPartsOfSpeech,
+      minCorpusCount: 1000000,
+      maxCorpusCount: -1,
+      minDictionaryCount: 1,
+      maxDictionaryCount: -1,
+    };
+
     try {
-      const { currentWord, id } = await api.startGame({
-        maxCorpusCount: 1,
-        maxDictionaryCount: 1,
-        maxLength: 1,
-        minDictionaryCount: 1,
-        minLength: 1,
-        selectedPartsOfSpeech: [],
-      });
+      const { currentWord, id } = await api.startGame(
+        defaultDifficultySettings
+      );
       setCurrentWord(currentWord);
       setId(id);
     } catch {

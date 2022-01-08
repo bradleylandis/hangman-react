@@ -30,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint **/* --ext .ts"
   },
   "browserslist": {
     "production": [
@@ -47,7 +48,9 @@
       "react-app",
       "react-app/jest",
       "plugin:prettier/recommended",
-      "plugin:jest/style"
-    ]
+      "plugin:jest/style",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "ignorePatterns": ["dist"]
   }
 }
