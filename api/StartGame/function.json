@@ -1,6 +1,7 @@
 {
   "bindings": [
     {
+      "route": "game/",
       "authLevel": "anonymous",
       "type": "httpTrigger",
       "direction": "in",

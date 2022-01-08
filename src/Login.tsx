@@ -1,5 +1,5 @@
 import * as React from "react";
-import type { LoggedInUser } from "./api";
+import type { LoggedInUser } from "./apiGateway";
 
 interface LoginButtonProps {
   user: LoggedInUser;

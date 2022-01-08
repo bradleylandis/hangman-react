@@ -10,7 +10,7 @@ const httpTrigger: AzureFunction = async function (
 ): Promise<void> {
   context.log("HTTP trigger function (RegisterGuess) processed a request.");
   //TODO: get gameId from route params instead of body
-  const gameId = req?.body?.gameId;
+  const gameId = context.bindingData.id;
   const guess = req?.body?.guess;
 
   const userId = getUserId(req.headers["x-ms-client-principal"]);

@@ -6,9 +6,9 @@ import Error from "./Error";
 import Login from "./Login";
 import Logout from "./Logout";
 import User from "./User";
-import { getUser } from "./api";
-import type { LoggedInUser } from "./api";
-import * as api from "./api";
+import { getUser } from "./apiGateway";
+import type { LoggedInUser } from "./apiGateway";
+import * as api from "./apiGateway";
 
 const App = () => {
   const [isLoading, setIsLoading] = React.useState(true);

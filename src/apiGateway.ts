@@ -43,7 +43,7 @@ export const startGame = async (
     maxLength,
   } = settings;
 
-  const response = await axios.post<ApplyGuessResponse>(`/api/StartGame`, {
+  const response = await axios.post<ApplyGuessResponse>(`/api/game`, {
     minCorpusCount: 10000,
     maxCorpusCount: maxCorpusCount,
     minDictionaryCount: minDictionaryCount,
@@ -68,8 +68,7 @@ export const registerGuess = async (
   gameId: string,
   guess: string
 ): Promise<GameState> => {
-  const response = await axios.post<GameState>(`/api/RegisterGuess`, {
-    gameId,
+  const response = await axios.post<GameState>(`/api/game/${gameId}/guess`, {
     guess,
   });
 

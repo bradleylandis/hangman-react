@@ -3,7 +3,7 @@ import PictureDisplay from "./PictureDisplay";
 import Congratulations from "./Congratulations";
 import WordDisplay from "./WordDisplay";
 import GuessedLettersDisplay from "./GuessedLettersDisplay";
-import { registerGuess, Status } from "./api";
+import { registerGuess, Status } from "./apiGateway";
 
 interface GameProps {
   id: string;

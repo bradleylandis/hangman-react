@@ -1,6 +1,7 @@
 {
   "bindings": [
     {
+      "route": "game/{id}/guess",
       "authLevel": "anonymous",
       "type": "httpTrigger",
       "direction": "in",
