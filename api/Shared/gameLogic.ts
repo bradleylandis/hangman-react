@@ -33,3 +33,8 @@ export const registerGuess = (game: GameType, guess: string): GameType => {
   game.status = won ? "won" : lost ? "lost" : "in progress";
   game.endedAt = won || lost ? new Date(Date.now()) : undefined;
 };
+
+export const getCurrentWord = (game: GameType): string =>
+  isInProgress(game.status)
+    ? concealWord(game.word, game.correctGuesses)
+    : game.word;

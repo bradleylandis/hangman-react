@@ -2,14 +2,17 @@ import { AzureFunction, Context, HttpRequest } from "@azure/functions";
 import "../Shared/db";
 import Game from "../Shared/game";
 import { getUserId } from "../Shared/user";
-import { concealWord, registerGuess, isInProgress } from "../Shared/gameLogic";
+import {
+  registerGuess,
+  isInProgress,
+  getCurrentWord,
+} from "../Shared/gameLogic";
 
 const httpTrigger: AzureFunction = async function (
   context: Context,
   req: HttpRequest
 ): Promise<void> {
   context.log("HTTP trigger function (RegisterGuess) processed a request.");
-  //TODO: get gameId from route params instead of body
   const gameId = context.bindingData.id;
   const guess = req?.body?.guess;
 
@@ -32,9 +35,7 @@ const httpTrigger: AzureFunction = async function (
 
     context.res = {
       body: {
-        word: isInProgress(game.status)
-          ? concealWord(game.word, game.correctGuesses)
-          : game.word,
+        word: getCurrentWord(game),
         incorrectGuesses: game.incorrectGuesses,
         status: game.status,
       },
