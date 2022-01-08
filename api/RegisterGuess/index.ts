@@ -19,6 +19,12 @@ const httpTrigger: AzureFunction = async function (
   const userId = getUserId(req.headers["x-ms-client-principal"]);
 
   const game = await Game.findById(gameId);
+
+  if (!game) {
+    context.res = {
+      status: 404,
+    };
+  }
   if (game.playerId !== userId) {
     context.res = {
       status: 403,
