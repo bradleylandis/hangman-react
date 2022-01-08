@@ -1,14 +1,14 @@
 interface WordDisplayProps {
-  word: string[];
-  correctGuesses: string[];
+  word: string;
 }
 
-const WordDisplay = ({ word, correctGuesses }: WordDisplayProps) => {
+const WordDisplay = ({ word }: WordDisplayProps) => {
   return (
     <h1>
-      {word.map(
-        (letter) => (correctGuesses.includes(letter) ? letter : "_") + " "
-      )}
+      {word
+        .split("")
+        .map((letter) => letter + " ")
+        .join("")}
       ({word.length} letters)
     </h1>
   );

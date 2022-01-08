@@ -44,10 +44,10 @@ export const startGame =
   () => async (dispatch: Dispatch, getState: () => GlobalState) => {
     dispatch(startLoading());
     try {
-      const { word, id } = await api.startGame(
+      const { currentWord, id } = await api.startGame(
         getDifficultySettings(getState())
       );
-      dispatch(setWord(word, id));
+      dispatch(setWord(currentWord, id));
     } catch (e) {
       console.error(e);
       dispatch(setError());

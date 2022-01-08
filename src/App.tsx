@@ -33,13 +33,15 @@ const App = () => {
         <Logout user={user} />
         <User user={user} />
       </div>
-      {isLoading ? (
-        <Loading />
-      ) : isError ? (
-        <Error tryAgain={() => dispatch(actions.startGame())} />
-      ) : (
-        <Game />
-      )}
+      <div>
+        {isLoading ? (
+          <Loading />
+        ) : isError ? (
+          <Error tryAgain={() => dispatch(actions.startGame())} />
+        ) : (
+          <Game />
+        )}
+      </div>
       <div>
         <a
           href="http://www.wordnik.com"

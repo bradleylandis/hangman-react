@@ -3,6 +3,7 @@ import "../Shared/db";
 import axios from "axios";
 import Game from "../Shared/game";
 import { getUserId } from "../Shared/user";
+import { concealWord } from "../Shared/gameLogic";
 
 const httpTrigger: AzureFunction = async function (
   context: Context,
@@ -42,7 +43,10 @@ const httpTrigger: AzureFunction = async function (
 
   context.res = {
     // status: 200, /* Defaults to 200 */
-    body: { id: game._id, word: response.word },
+    body: {
+      id: game._id,
+      currentWord: concealWord(response.word, []),
+    },
   };
 };
 

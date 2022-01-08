@@ -1,5 +1,5 @@
 interface CongratulationsProps {
-  word: string[];
+  word: string;
   startOver: () => void;
   lost: boolean;
 }

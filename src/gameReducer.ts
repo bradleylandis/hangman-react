@@ -124,3 +124,7 @@ export const getFinished = (state: GameState) => state.finished;
 export const getIncorrectGuesses = (state: GameState) => state.incorrectGuesses;
 export const getCorrectGuesses = (state: GameState) => state.correctGuesses;
 export const getId = (state: GameState) => state.id;
+export const getCurrentWord = (state: GameState) =>
+  state.word
+    .map((letter) => (state.correctGuesses.includes(letter) ? letter : "_"))
+    .join("");

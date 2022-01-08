@@ -26,3 +26,6 @@ export const getCorrectGuesses = (state: GlobalState) =>
 export const getIncorrectGuesses = (state: GlobalState) =>
   fromGame.getIncorrectGuesses(state.game);
 export const getId = (state: GlobalState) => fromGame.getId(state.game);
+
+export const getCurrentWord = (state: GlobalState) =>
+  fromGame.getCurrentWord(state.game);

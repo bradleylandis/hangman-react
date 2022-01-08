@@ -4,13 +4,7 @@ import userEvent from "@testing-library/user-event";
 
 describe("Congratulations", () => {
   it("displays Congratulations when you have won", () => {
-    render(
-      <Congratulations
-        lost={false}
-        word={["t", "e", "s", "t"]}
-        startOver={() => {}}
-      />
-    );
+    render(<Congratulations lost={false} word={"test"} startOver={() => {}} />);
 
     const message = screen.getByText("Congratulations! The word was test.");
 
@@ -18,13 +12,7 @@ describe("Congratulations", () => {
   });
 
   it("displays Sorry when you have lost", () => {
-    render(
-      <Congratulations
-        lost={true}
-        word={["t", "e", "s", "t"]}
-        startOver={() => {}}
-      />
-    );
+    render(<Congratulations lost={true} word={"test"} startOver={() => {}} />);
 
     const message = screen.getByText("Sorry! The word was test.");
 
@@ -33,7 +21,7 @@ describe("Congratulations", () => {
 
   it("calls start over when clicking Play Again", () => {
     const startOver = jest.fn();
-    render(<Congratulations startOver={startOver} word={[]} lost={false} />);
+    render(<Congratulations startOver={startOver} word={""} lost={false} />);
 
     const button = screen.getByRole("button", { name: "Play again" });
     userEvent.click(button);

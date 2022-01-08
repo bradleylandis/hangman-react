@@ -5,25 +5,18 @@ import WordDisplay from "./WordDisplay";
 import GuessedLettersDisplay from "./GuessedLettersDisplay";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "./actions";
-import {
-  getWord,
-  getCorrectGuesses,
-  getIncorrectGuesses,
-  getFinished,
-  getLost,
-  getId,
-} from "./reducers";
-import { registerGuess } from "./api";
+import { getCurrentWord, getId } from "./reducers";
+import { registerGuess, Status } from "./api";
 
 const Game = () => {
   const dispatch = useDispatch();
-  const { applyGuess, startGame } = actions;
-  const correctGuesses = useSelector(getCorrectGuesses);
-  const incorrectGuesses = useSelector(getIncorrectGuesses);
-  const finished = useSelector(getFinished);
-  const lost = useSelector(getLost);
-  const word = useSelector(getWord);
+  const { startGame } = actions;
   const gameId = useSelector(getId);
+  const [incorrectGuesses, setIncorrectGuesses] = React.useState<string[]>([]);
+  const [currentWord, setCurrentWord] = React.useState(
+    useSelector(getCurrentWord)
+  );
+  const [status, setStatus] = React.useState<Status>("in progress");
 
   React.useEffect(() => {
     async function handleKeyPress(this: HTMLDocument, e: KeyboardEvent) {
@@ -31,15 +24,10 @@ const Game = () => {
     }
 
     const captureGuess = async (guess: string) => {
-      await registerGuess(gameId!, guess);
-      const normalizedGuess = guess.toLowerCase();
-      if (
-        !finished &&
-        !correctGuesses.includes(normalizedGuess) &&
-        !incorrectGuesses.includes(normalizedGuess)
-      ) {
-        dispatch(applyGuess(normalizedGuess));
-      }
+      const gameState = await registerGuess(gameId!, guess);
+      setCurrentWord(gameState.word);
+      setIncorrectGuesses(gameState.incorrectGuesses);
+      setStatus(gameState.status);
     };
 
     document.addEventListener("keypress", handleKeyPress);
@@ -49,15 +37,15 @@ const Game = () => {
   return (
     <div>
       <PictureDisplay numberOfIncorrectGuesses={incorrectGuesses.length} />
-      {finished ? (
+      {status !== "in progress" ? (
         <Congratulations
-          lost={lost}
-          word={word}
+          lost={status === "lost"}
+          word={currentWord}
           startOver={() => dispatch(startGame())}
         />
       ) : (
         <div>
-          <WordDisplay word={word} correctGuesses={correctGuesses} />
+          <WordDisplay word={currentWord} />
           <GuessedLettersDisplay guessedLetters={incorrectGuesses} />
         </div>
       )}

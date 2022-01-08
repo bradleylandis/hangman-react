@@ -23,7 +23,7 @@ type GetUserResponse = {
 
 export interface ApplyGuessResponse {
   id: string;
-  word: string;
+  currentWord: string;
 }
 
 export const getUser = async (): Promise<LoggedInUser> => {
@@ -33,7 +33,7 @@ export const getUser = async (): Promise<LoggedInUser> => {
 
 export const startGame = async (
   settings: DifficultySettings
-): Promise<{ id: string; word: string }> => {
+): Promise<ApplyGuessResponse> => {
   const {
     selectedPartsOfSpeech,
     maxCorpusCount,
@@ -56,12 +56,22 @@ export const startGame = async (
   return response.data;
 };
 
+export type Status = "won" | "lost" | "in progress";
+
+export interface GameState {
+  word: string;
+  incorrectGuesses: string[];
+  status: Status;
+}
+
 export const registerGuess = async (
   gameId: string,
   guess: string
-): Promise<void> => {
-  await axios.post(`/api/RegisterGuess`, {
+): Promise<GameState> => {
+  const response = await axios.post<GameState>(`/api/RegisterGuess`, {
     gameId,
     guess,
   });
+
+  return response.data;
 };

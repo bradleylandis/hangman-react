@@ -3,6 +3,7 @@ import "../Shared/db";
 import Game from "../Shared/game";
 import type { GameType } from "../Shared/game";
 import { getUserId } from "../Shared/user";
+import { concealWord } from "../Shared/gameLogic";
 
 const httpTrigger: AzureFunction = async function (
   context: Context,
@@ -24,17 +25,21 @@ const httpTrigger: AzureFunction = async function (
     context.res = {
       status: 400,
     };
+    //TODO: Check if guess is valid
   } else {
     registerGuess(game, guess);
 
     await game.save();
 
-    const newWord = game.word
-      .split("")
-      .map((letter) => (game.correctGuesses.includes(letter) ? letter : "_"));
-
     context.res = {
-      body: JSON.stringify({ word: newWord }),
+      body: JSON.stringify({
+        word:
+          game.status === "in progress"
+            ? concealWord(game.word, game.correctGuesses)
+            : game.word,
+        incorrectGuesses: game.incorrectGuesses,
+        status: game.status,
+      }),
       // status: 200, /* Defaults to 200 */
     };
   }
