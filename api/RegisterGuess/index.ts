@@ -13,8 +13,8 @@ const httpTrigger: AzureFunction = async function (
   req: HttpRequest
 ): Promise<void> {
   context.log("HTTP trigger function (RegisterGuess) processed a request.");
-  const gameId = context.bindingData.id;
-  const guess = req?.body?.guess;
+  const gameId: string = context.bindingData.id;
+  const guess: string = req?.body?.guess;
 
   const userId = getUserId(req.headers["x-ms-client-principal"]);
 
@@ -24,8 +24,7 @@ const httpTrigger: AzureFunction = async function (
     context.res = {
       status: 404,
     };
-  }
-  if (game.playerId !== userId) {
+  } else if (game.playerId !== userId) {
     context.res = {
       status: 403,
     };

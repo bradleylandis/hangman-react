@@ -29,6 +29,8 @@ export const fetchWord = async (
     );
     return response.data;
   } catch (e) {
-    throw new Error(`Could not get word from wordnik: ${JSON.stringify(e)}`);
+    if (e instanceof Error) {
+      throw new Error(`Could not get word from wordnik: ${JSON.stringify(e)}`);
+    }
   }
 };

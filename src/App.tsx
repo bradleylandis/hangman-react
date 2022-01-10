@@ -34,7 +34,7 @@ const App = () => {
       minLength: 7,
       maxLength: 15,
       includePartsOfSpeech: selectedPartsOfSpeech,
-      minCorpusCount: 1000000,
+      minCorpusCount: 10_000,
       maxCorpusCount: -1,
       minDictionaryCount: 1,
       maxDictionaryCount: -1,
