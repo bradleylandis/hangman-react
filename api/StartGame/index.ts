@@ -18,7 +18,7 @@ const httpTrigger: AzureFunction = async function (
   const playerId = getUserId(req.headers["x-ms-client-principal"]);
 
   const game = new Game({
-    word: response.word,
+    word: response.word.toLowerCase(),
     status: "in progress",
     playerId: playerId,
     startedAt: new Date(Date.now()),
